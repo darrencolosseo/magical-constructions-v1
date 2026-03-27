@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Read(//Users/darren/Downloads/**)",
+      "Bash(python3 -c \":*)",
+      "Bash(pip3 install:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx vite:*)",
+      "Bash(node_modules/.bin/vite build:*)",
+      "Bash(xxd /private/tmp/claude-501/-Users-darren-Desktop-Example-Website/101accfd-82f4-4c9e-8ad4-1e5029de766d/tasks/bgomzm23c.output)",
+      "Bash(node -e \":*)",
+      "Bash(node -e \"require\\(''./src/config/pricing.js''\\)\")",
+      "Bash(./node_modules/.bin/vite build:*)",
+      "Bash(ls ~/.ssh/*.pub)",
+      "Bash(gh auth:*)",
+      "Bash(yes)",
+      "Bash(npx create-vite@latest . --template react-ts)",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''instagram''\\)\\)\\)\")",
+      "WebFetch(domain:millboard.com)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5178/)",
+      "Bash(xargs kill:*)",
+      "Bash(node -e \"require\\(''''puppeteer''''\\)\")",
+      "Bash(npx playwright:*)",
+      "Bash(node /tmp/screenshot-site.js)",
+      "Bash(mkdir -p \"/Users/darren/Desktop/MC Website V2/public/images\")",
+      "Bash(cp \"/Users/darren/Desktop/Example Website/public/images/\"*.jpg \"/Users/darren/Desktop/MC Website V2/public/images/\")",
+      "Bash(for f:*)",
+      "Bash(do cp:*)",
+      "Bash(done)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"const l = require\\(''./node_modules/lucide-react''\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''instagram''\\) || k.toLowerCase\\(\\).includes\\(''mail''\\) || k.toLowerCase\\(\\).includes\\(''map''\\)\\)\\)\")",
+      "Bash(git config:*)",
+      "Bash(brew list:*)",
+      "Bash(npx vercel:*)",
+      "Bash(brew install:*)"
+    ]
+  }
+}

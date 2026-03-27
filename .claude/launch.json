@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fab-quote",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd fab-quote && npm run dev"],
+      "port": 5173
+    },
+    {
+      "name": "magical-constructions",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5178", "--strictPort"],
+      "port": 5178
+    }
+  ]
+}
