@@ -14,6 +14,18 @@ const items = [
   { img: '/images/gallery-10.jpg', title: 'Composite Decking', suburb: 'Artarmon', cat: 'decking' },
   { img: '/images/gallery-11.jpg', title: 'Facade Cladding', suburb: 'St Leonards', cat: 'cladding' },
   { img: '/images/gallery-12.jpg', title: 'Alfresco Build', suburb: 'Pymble', cat: 'alfresco' },
+  { img: '/images/gallery-13.jpg', title: 'Batten Wall Screen', suburb: 'Neutral Bay', cat: 'cladding' },
+  { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Northbridge', cat: 'alfresco' },
+  { img: '/images/gallery-15.jpg', title: 'Hardwood Courtyard Deck', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-16.jpg', title: 'Hardwood Entry Deck', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-17.jpg', title: 'Composite Courtyard Deck', suburb: 'Rushcutters Bay', cat: 'decking' },
+  { img: '/images/gallery-18.jpg', title: 'Composite Deck & Gardens', suburb: 'Rushcutters Bay', cat: 'decking' },
+  { img: '/images/gallery-19.jpg', title: 'Alfresco Pergola & Deck', suburb: 'Penrith', cat: 'alfresco' },
+  { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
+  { img: '/images/gallery-21.jpg', title: 'Custom Built-In Shelving', suburb: 'Mosman', cat: 'interior' },
+  { img: '/images/gallery-22.jpg', title: 'Feature Wall & Fireplace', suburb: 'Lane Cove', cat: 'interior' },
+  { img: '/images/gallery-23.jpg', title: 'Fireplace Feature Panel', suburb: 'Willoughby', cat: 'interior' },
+  { img: '/images/gallery-24.jpg', title: 'Composite Ceiling Cladding', suburb: 'Northbridge', cat: 'cladding' },
 ]
 
 const filters = ['All', 'Decking', 'Cladding', 'Interior', 'Alfresco']
