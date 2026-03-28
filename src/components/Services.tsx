@@ -1,129 +1,88 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const services = [
-  {
-    name: 'Composite Decking',
-    image: '/images/service-decking-composite.jpg',
-    description: 'Large-format composite boards. Precision-framed pool surrounds. Built to last decades.',
-  },
-  {
-    name: 'Hardwood Decking',
-    image: '/images/service-decking-hardwood.jpg',
-    description: 'Spotted gum, merbau & ironbark. Freshly oiled. Finished to perfection.',
-  },
-  {
-    name: 'Aluminium Cladding & Facades',
-    image: '/images/service-cladding.jpg',
-    description: 'Architectural batten profiles, castellated cladding & facade transformations.',
-  },
-  {
-    name: 'Interior Renovations',
-    image: '/images/service-interior.jpg',
-    description: 'Timber batten ceilings, feature walls & high-end interior finishes.',
-  },
-  {
-    name: 'Alfresco Kitchens',
-    image: '/images/service-alfresco.jpg',
-    description: 'Custom outdoor kitchens built for the way Australians live.',
-  },
-  {
-    name: 'Full Builds & Renovations',
-    image: '/images/service-builds.jpg',
-    description: 'End-to-end residential builds. Architecturally considered. Flawlessly executed.',
-  },
+  { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/service-decking-composite.jpg', desc: 'Large-format boards, pool surrounds & precision framing built to last decades.' },
+  { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/service-decking-hardwood.jpg', desc: 'Spotted gum, blackbutt & ironbark — sourced, cut and finished on-site.' },
+  { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/service-cladding.jpg', desc: "Aluminium batten, fibre cement & timber — transforming your home's first impression." },
+  { title: 'Interior Renovations', category: 'Interiors', img: '/images/service-interior.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
+  { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/service-alfresco.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
+  { title: 'Full Builds', category: 'Construction', img: '/images/service-builds.jpg', desc: 'End-to-end project management for extensions, granny flats and new builds.' },
 ]
 
-function ServiceCard({ service }: { service: typeof services[0] }) {
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const [hovered, setHovered] = useState(false)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <div
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        borderTop: `1px solid ${hovered ? 'rgba(201,164,106,0.35)' : 'rgba(255,255,255,0.05)'}`,
-        borderRight: `1px solid ${hovered ? 'rgba(201,164,106,0.35)' : 'rgba(255,255,255,0.05)'}`,
-        borderBottom: `1px solid ${hovered ? 'rgba(201,164,106,0.35)' : 'rgba(255,255,255,0.05)'}`,
-        borderLeft: `1px solid ${hovered ? 'rgba(201,164,106,0.35)' : 'rgba(255,255,255,0.05)'}`,
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        transition: 'border-color 0.4s ease, transform 0.4s ease',
-      }}
+      style={{ position: 'relative', overflow: 'hidden', height: '420px', cursor: 'pointer' }}
     >
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6 }}
-      style={{
-        background: '#131109',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Image */}
-      <div style={{ height: 320, overflow: 'hidden' }}>
-        <img
-          src={service.image}
-          alt={service.name}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'transform 0.8s ease',
-            transform: hovered ? 'scale(1.04)' : 'scale(1)',
-          }}
-        />
-      </div>
+      <motion.img
+        src={service.img} alt={service.title}
+        animate={{ scale: hovered ? 1.07 : 1 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      {/* Base gradient */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,8,5,0.92) 0%, rgba(10,8,5,0.3) 50%, transparent 100%)' }} />
+      {/* Hover overlay */}
+      <motion.div animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
+        style={{ position: 'absolute', inset: 0, background: 'rgba(10,8,5,0.6)' }} />
 
-      {/* Body */}
-      <div style={{ padding: '32px 32px 40px' }}>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 400, color: '#F2EDE6', marginBottom: 12 }}>
-          {service.name}
-        </h3>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, lineHeight: 1.8, color: '#9A9088', marginBottom: 24, fontWeight: 300 }}>
-          {service.description}
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A46A', fontWeight: 300 }}>
-            Explore
-          </span>
-          <ArrowRight
-            size={12}
-            color="#C9A46A"
-            strokeWidth={1.5}
-            style={{ transform: hovered ? 'translateX(6px)' : 'translateX(0)', transition: 'transform 0.4s ease' }}
-          />
-        </div>
-        <div style={{ height: 1, background: '#C9A46A', width: hovered ? '100%' : 0, transition: 'width 0.5s ease', marginTop: 8 }} />
+      <div style={{ position: 'absolute', inset: 0, padding: '32px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <div className="label-sm" style={{ color: '#C2A87A', marginBottom: 10 }}>{service.category}</div>
+        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 400, color: '#EDE8DF', lineHeight: 1.2, marginBottom: 14 }}>{service.title}</h3>
+        <motion.p
+          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.65)', fontWeight: 300, lineHeight: 1.7, marginBottom: 20 }}
+        >{service.desc}</motion.p>
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
+          transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+        >
+          <div style={{ width: 24, height: 1, background: '#C2A87A' }} />
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C2A87A', fontWeight: 400 }}>Learn More</span>
+        </motion.div>
       </div>
     </motion.div>
-    </div>
   )
 }
 
 export default function Services() {
-  return (
-    <section id="services" style={{ background: '#0D0B09', padding: '140px 0' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 48px' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: 64 }}
-        >
-          <div className="label-caps" style={{ marginBottom: 16 }}>What We Build</div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 56, fontWeight: 300, color: '#F2EDE6' }}>
-            Every Detail. Every Time.
-          </h2>
-        </motion.div>
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-          {services.map(service => (
-            <ServiceCard key={service.name} service={service} />
-          ))}
+  return (
+    <section id="services" style={{ padding: '140px 80px', background: '#0A0805' }}>
+      <div ref={ref} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 72 }}>
+        <div>
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
+            What We Build
+          </motion.div>
+          <div style={{ overflow: 'hidden' }}>
+            <motion.h2 initial={{ y: '100%' }} animate={inView ? { y: 0 } : {}} transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(44px, 5vw, 72px)', fontWeight: 300, color: '#EDE8DF', lineHeight: 1.05 }}>
+              Every service,<br /><em style={{ color: '#C2A87A' }}>crafted with care.</em>
+            </motion.h2>
+          </div>
         </div>
+        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.35 }}
+          style={{ maxWidth: 340, fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.45)', fontWeight: 300, lineHeight: 1.85, textAlign: 'right' }}>
+          From the first site visit to the final coat of oil, we manage every aspect of your project with precision and care.
+        </motion.p>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+        {services.map((s, i) => <ServiceCard key={i} service={s} index={i} />)}
       </div>
     </section>
   )

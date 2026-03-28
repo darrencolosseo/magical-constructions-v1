@@ -1,377 +1,109 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { useForm } from 'react-hook-form'
-import { motion } from 'framer-motion'
-import { Layers2, TreePine, Building2, Home, UtensilsCrossed, Hammer } from 'lucide-react'
 
-const serviceOptions = [
-  { label: 'Composite Decking', icon: Layers2 },
-  { label: 'Hardwood Decking', icon: TreePine },
-  { label: 'Cladding / Facade', icon: Building2 },
-  { label: 'Interior Build', icon: Home },
-  { label: 'Alfresco Kitchen', icon: UtensilsCrossed },
-  { label: 'Full Renovation', icon: Hammer },
-]
+type FormData = { name: string; email: string; phone: string; suburb: string; service: string; message: string }
 
-const budgets = ['Under $10,000', '$10,000–$25,000', '$25,000–$50,000', '$50,000+', 'Not sure']
-const timelines = ['ASAP', 'Within 1–3 months', 'Just planning ahead']
-
-const inputStyle = {
-  background: '#131109',
-  borderTop: '1px solid #2A2520',
-  borderRight: '1px solid #2A2520',
-  borderBottom: '1px solid #2A2520',
-  borderLeft: '1px solid #2A2520',
-  color: '#F2EDE6',
-  padding: '12px 16px',
-  fontFamily: "'Inter', sans-serif",
-  fontSize: 14,
-  fontWeight: 300,
-  width: '100%',
-  outline: 'none',
-  borderRadius: 0,
-}
+const services = ['Composite Decking', 'Hardwood Decking', 'Cladding / Facade', 'Interior Renovation', 'Alfresco Kitchen', 'Full Build']
 
 export default function QuoteForm() {
-  const [step, setStep] = useState(1)
-  const [selectedService, setSelectedService] = useState('')
-  const [selectedBudget, setSelectedBudget] = useState('')
-  const [selectedTimeline, setSelectedTimeline] = useState('')
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
   const [submitted, setSubmitted] = useState(false)
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
 
-  const { register, handleSubmit, formState: { errors } } = useForm()
-
-  const onSubmit = () => {
-    setSubmitted(true)
+  const inputStyle = {
+    width: '100%', background: 'transparent', border: 'none',
+    borderBottom: '1px solid rgba(194,168,122,0.2)',
+    padding: '14px 0', fontFamily: "'Inter', sans-serif", fontSize: 14,
+    color: '#EDE8DF', fontWeight: 300, outline: 'none', transition: 'border-color 0.3s ease',
   }
 
   return (
-    <section id="quote" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,164,106,0.2)', padding: '112px 0' }}>
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 48px' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="label-caps" style={{ marginBottom: 16 }}>Free Quote</div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 52, fontWeight: 300, color: '#F2EDE6' }}>
-            Tell Us About Your Project
-          </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#9A9088', marginTop: 12, marginBottom: 48, fontWeight: 300 }}>
-            We respond within 24 hours with a detailed proposal.
-          </p>
-        </motion.div>
-
-        {/* Progress */}
-        {!submitted && (
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: 48 }}>
-            {[1, 2, 3].map((s, i) => (
-              <div key={s} style={{ display: 'flex', alignItems: 'center', flex: i < 2 ? 1 : 'none' }}>
-                <div style={{
-                  width: 32,
-                  height: 32,
-                  border: step >= s ? 'none' : '1px solid rgba(201,164,106,0.3)',
-                  background: step >= s ? '#C9A46A' : 'transparent',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: 11,
-                  color: step >= s ? '#0D0B09' : '#5A5248',
-                  fontWeight: 300,
-                  flexShrink: 0,
-                }}>
-                  {s}
-                </div>
-                {i < 2 && (
-                  <div style={{ flex: 1, height: 1, background: step > s ? 'rgba(201,164,106,0.8)' : 'rgba(201,164,106,0.2)', margin: '0 8px' }} />
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {submitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            style={{ textAlign: 'center', padding: '60px 0' }}
-          >
-            <svg width="80" height="80" viewBox="0 0 80 80" style={{ margin: '0 auto' }}>
-              <motion.circle
-                cx="40" cy="40" r="36"
-                fill="none"
-                stroke="#C9A46A"
-                strokeWidth="2"
-                strokeDasharray="226"
-                initial={{ strokeDashoffset: 226 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{ duration: 0.8 }}
-              />
-              <motion.path
-                d="M24 40 L36 52 L56 30"
-                fill="none"
-                stroke="#C9A46A"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              />
-            </svg>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontStyle: 'italic', fontWeight: 300, color: '#F2EDE6', marginTop: 32 }}>
-              Request Received.
-            </h3>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#9A9088', marginTop: 12, fontWeight: 300 }}>
-              We'll be in touch within 24 hours.
-            </p>
+    <section id="quote" style={{ background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.07)' }} ref={ref}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 720 }}>
+        {/* Left */}
+        <div style={{ padding: '120px 80px', borderRight: '1px solid rgba(194,168,122,0.07)' }}>
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
+            Get in Touch
           </motion.div>
-        ) : (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {step === 1 && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9A9088', marginBottom: 24, fontWeight: 300 }}>
-                  What are you looking for?
-                </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-                  {serviceOptions.map(opt => {
-                    const Icon = opt.icon
-                    const selected = selectedService === opt.label
-                    return (
-                      <div
-                        key={opt.label}
-                        onClick={() => setSelectedService(opt.label)}
-                        style={{
-                          position: 'relative',
-                          background: selected ? 'rgba(201,164,106,0.07)' : '#131109',
-                          border: `1px solid ${selected ? '#C9A46A' : '#2A2520'}`,
-                          padding: '28px 20px',
-                          minHeight: 130,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: 16,
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {selected && (
-                          <span style={{ position: 'absolute', top: 8, right: 8, fontFamily: "'Inter'", fontSize: 9, color: '#C9A46A', fontWeight: 300 }}>✓</span>
-                        )}
-                        <Icon size={24} strokeWidth={1.5} color={selected ? '#C9A46A' : '#5A5248'} />
-                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: selected ? '#C9A46A' : '#9A9088', fontWeight: 300, textAlign: 'center' }}>
-                          {opt.label}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div style={{ marginTop: 40, display: 'flex', justifyContent: 'flex-end' }}>
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    style={{
-                      background: 'linear-gradient(135deg, #C9A46A 0%, #B8924F 100%)',
-                      color: '#0D0B09',
-                      padding: '14px 32px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontWeight: 300,
-                    }}
-                  >
-                    Next Step →
-                  </button>
-                </div>
-              </motion.div>
-            )}
+          <div style={{ overflow: 'hidden', marginBottom: 28 }}>
+            <motion.h2 initial={{ y: '100%' }} animate={inView ? { y: 0 } : {}} transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(38px, 4vw, 60px)', fontWeight: 300, color: '#EDE8DF', lineHeight: 1.1 }}>
+              Let's talk about<br /><em style={{ color: '#C2A87A' }}>your project.</em>
+            </motion.h2>
+          </div>
+          <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.4 }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.85, marginBottom: 52, maxWidth: 380 }}>
+            We respond within 24 hours with a detailed, itemised proposal. No hidden costs, no surprises.
+          </motion.p>
+          {[
+            'Response within 24 hours',
+            'Free site visit & consultation',
+            'Detailed itemised quote',
+            'No obligation',
+          ].map((item, i) => (
+            <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.5 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 18 }}>
+              <div style={{ width: 4, height: 4, background: '#C2A87A', borderRadius: '50%', flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.55)', fontWeight: 300 }}>{item}</span>
+            </motion.div>
+          ))}
+        </div>
 
-            {step === 2 && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-                <div style={{ marginBottom: 24 }}>
-                  <textarea
-                    {...register('description')}
-                    rows={4}
-                    placeholder="e.g. 80sqm composite deck with built-in pool surround and glass balustrade, teak tone finish..."
-                    style={{ ...inputStyle, resize: 'vertical' }}
-                  />
+        {/* Right */}
+        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
+          style={{ padding: '120px 80px' }}>
+          {submitted ? (
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 24 }}>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 56, fontWeight: 300, color: '#C2A87A' }}>Thank you.</div>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.5)', fontWeight: 300, lineHeight: 1.8 }}>
+                We'll be in touch within 24 hours with a detailed proposal for your project.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit(() => setSubmitted(true))} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+                <div>
+                  <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Full Name</label>
+                  <input {...register('name', { required: true })} placeholder="Your name" style={{ ...inputStyle, borderBottomColor: errors.name ? '#C27A5A' : 'rgba(194,168,122,0.2)' }} />
                 </div>
-                <div style={{ marginBottom: 24 }}>
-                  <input
-                    {...register('suburb')}
-                    placeholder="Your suburb"
-                    style={inputStyle}
-                  />
+                <div>
+                  <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Email</label>
+                  <input {...register('email', { required: true })} type="email" placeholder="your@email.com" style={{ ...inputStyle, borderBottomColor: errors.email ? '#C27A5A' : 'rgba(194,168,122,0.2)' }} />
                 </div>
-                <div style={{ marginBottom: 24 }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9A9088', marginBottom: 12, fontWeight: 300 }}>Budget</p>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {budgets.map(b => (
-                      <button
-                        key={b}
-                        type="button"
-                        onClick={() => setSelectedBudget(b)}
-                        style={{
-                          border: `1px solid ${selectedBudget === b ? '#C9A46A' : '#2A2520'}`,
-                          background: selectedBudget === b ? 'rgba(201,164,106,0.07)' : '#131109',
-                          color: selectedBudget === b ? '#C9A46A' : '#9A9088',
-                          padding: '8px 16px',
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: 11,
-                          letterSpacing: '0.1em',
-                          cursor: 'pointer',
-                          fontWeight: 300,
-                          transition: 'all 0.3s ease',
-                        }}
-                      >{b}</button>
-                    ))}
-                  </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+                <div>
+                  <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Phone</label>
+                  <input {...register('phone')} placeholder="04xx xxx xxx" style={inputStyle} />
                 </div>
-                <div style={{ marginBottom: 40 }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9A9088', marginBottom: 12, fontWeight: 300 }}>Timeline</p>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {timelines.map(t => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setSelectedTimeline(t)}
-                        style={{
-                          border: `1px solid ${selectedTimeline === t ? '#C9A46A' : '#2A2520'}`,
-                          background: selectedTimeline === t ? 'rgba(201,164,106,0.07)' : '#131109',
-                          color: selectedTimeline === t ? '#C9A46A' : '#9A9088',
-                          padding: '8px 16px',
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: 11,
-                          letterSpacing: '0.1em',
-                          cursor: 'pointer',
-                          fontWeight: 300,
-                          transition: 'all 0.3s ease',
-                        }}
-                      >{t}</button>
-                    ))}
-                  </div>
+                <div>
+                  <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Suburb</label>
+                  <input {...register('suburb')} placeholder="Your suburb" style={inputStyle} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    style={{
-                      border: '1px solid #2A2520',
-                      background: 'transparent',
-                      color: '#9A9088',
-                      padding: '14px 32px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      fontWeight: 300,
-                    }}
-                  >← Back</button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    style={{
-                      background: 'linear-gradient(135deg, #C9A46A 0%, #B8924F 100%)',
-                      color: '#0D0B09',
-                      padding: '14px 32px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontWeight: 300,
-                    }}
-                  >Next Step →</button>
+              </div>
+              <div>
+                <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 12 }}>Service Required</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                  {services.map(s => (
+                    <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+                      <input type="radio" {...register('service')} value={s} style={{ accentColor: '#C2A87A' }} />
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: 'rgba(237,232,223,0.5)', fontWeight: 300 }}>{s}</span>
+                    </label>
+                  ))}
                 </div>
-              </motion.div>
-            )}
-
-            {step === 3 && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-                  <input
-                    {...register('firstName', { required: true })}
-                    placeholder="First Name"
-                    style={{ ...inputStyle, borderTop: `1px solid ${errors.firstName ? '#C9A46A' : '#2A2520'}`, borderRight: `1px solid ${errors.firstName ? '#C9A46A' : '#2A2520'}`, borderBottom: `1px solid ${errors.firstName ? '#C9A46A' : '#2A2520'}`, borderLeft: `1px solid ${errors.firstName ? '#C9A46A' : '#2A2520'}` }}
-                  />
-                  <input
-                    {...register('lastName', { required: true })}
-                    placeholder="Last Name"
-                    style={{ ...inputStyle, borderTop: `1px solid ${errors.lastName ? '#C9A46A' : '#2A2520'}`, borderRight: `1px solid ${errors.lastName ? '#C9A46A' : '#2A2520'}`, borderBottom: `1px solid ${errors.lastName ? '#C9A46A' : '#2A2520'}`, borderLeft: `1px solid ${errors.lastName ? '#C9A46A' : '#2A2520'}` }}
-                  />
-                </div>
-                <div style={{ marginBottom: 16 }}>
-                  <input
-                    {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-                    placeholder="Email"
-                    type="email"
-                    style={{ ...inputStyle, borderColor: errors.email ? '#C9A46A' : '#2A2520' }}
-                  />
-                </div>
-                <div style={{ marginBottom: 16 }}>
-                  <input
-                    {...register('phone')}
-                    placeholder="Phone"
-                    type="tel"
-                    style={inputStyle}
-                  />
-                </div>
-                <div style={{ marginBottom: 40 }}>
-                  <select
-                    {...register('source')}
-                    style={{ ...inputStyle, cursor: 'pointer' }}
-                  >
-                    <option value="" style={{ background: '#131109' }}>How did you find us?</option>
-                    <option value="instagram" style={{ background: '#131109' }}>Instagram</option>
-                    <option value="google" style={{ background: '#131109' }}>Google</option>
-                    <option value="referral" style={{ background: '#131109' }}>Referral</option>
-                    <option value="other" style={{ background: '#131109' }}>Other</option>
-                  </select>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    style={{
-                      border: '1px solid #2A2520',
-                      background: 'transparent',
-                      color: '#9A9088',
-                      padding: '14px 32px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      fontWeight: 300,
-                    }}
-                  >← Back</button>
-                  <button
-                    type="submit"
-                    style={{
-                      background: 'linear-gradient(135deg, #C9A46A 0%, #B8924F 100%)',
-                      color: '#0D0B09',
-                      padding: '14px 48px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontWeight: 300,
-                    }}
-                  >Submit Request</button>
-                </div>
-              </motion.div>
-            )}
-          </form>
-        )}
+              </div>
+              <div>
+                <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Tell us about your project</label>
+                <textarea {...register('message')} placeholder="Brief description, timeline, budget range..." rows={4} style={{ ...inputStyle, resize: 'none' }} />
+              </div>
+              <div>
+                <button type="submit" className="btn-gold">Submit Request</button>
+              </div>
+            </form>
+          )}
+        </motion.div>
       </div>
     </section>
   )

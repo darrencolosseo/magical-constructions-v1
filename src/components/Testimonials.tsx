@@ -1,96 +1,83 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 
 const testimonials = [
   {
-    quote: "The composite deck they built for our home is extraordinary. Neighbours stop us constantly to ask about it.",
-    name: "James D.",
-    location: "Harrington Park",
+    quote: "The attention to detail was extraordinary. From the first consultation to the final walkthrough, the team were professional, communicative and genuinely proud of their work. Our deck is the envy of the neighbourhood.",
+    name: 'Sarah M.',
+    location: 'Mosman, NSW',
+    project: 'Composite Decking & Alfresco',
   },
   {
-    quote: "Professional, precise and genuinely proud of their craft. Couldn't recommend more highly.",
-    name: "Sarah M.",
-    location: "Northwood",
+    quote: "We had a complex cladding project that three other builders turned down. Magical Constructions took it on, managed the council requirements, and delivered a result that exceeded our expectations.",
+    name: 'James & Cath R.',
+    location: 'Northwood, NSW',
+    project: 'Aluminium Facade Cladding',
   },
   {
-    quote: "They transformed our outdoor space completely. The alfresco kitchen is better than we ever imagined.",
-    name: "Michael T.",
-    location: "Baulkham Hills",
+    quote: "Responsive, honest, and skilled. They completed our full renovation on time and on budget — something we didn't think was possible. We'll use them for every future project.",
+    name: 'Michael T.',
+    location: 'Lane Cove, NSW',
+    project: 'Interior Renovation & Deck',
   },
 ]
 
 export default function Testimonials() {
-  const [current, setCurrent] = useState(0)
+  const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-100px' })
 
   useEffect(() => {
     if (paused) return
-    const t = setInterval(() => setCurrent(c => (c + 1) % testimonials.length), 5000)
+    const t = setInterval(() => setIndex(i => (i + 1) % testimonials.length), 6000)
     return () => clearInterval(t)
   }, [paused])
 
+  const t = testimonials[index]
+
   return (
-    <section
-      style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,164,106,0.1)', padding: '112px 48px' }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="label-caps" style={{ textAlign: 'center', marginBottom: 48 }}>Testimonials</div>
-      <div style={{ maxWidth: 768, margin: '0 auto', textAlign: 'center' }}>
+    <section ref={ref} style={{ padding: '140px 80px', background: '#080604', borderTop: '1px solid rgba(194,168,122,0.07)' }}
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8 }}
+          className="gold-line label-sm" style={{ marginBottom: 80 }}>
+          Client Testimonials
+        </motion.div>
+
         <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+          <motion.div key={index}
+            initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 120,
-              lineHeight: 0.8,
-              color: 'rgba(201,164,106,0.18)',
-              display: 'block',
-              marginBottom: 16,
-            }}>"</span>
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 120, lineHeight: 0.7, color: 'rgba(194,168,122,0.2)', marginBottom: 40, userSelect: 'none' }}>"</div>
             <p style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 22,
-              fontStyle: 'italic',
-              fontWeight: 400,
-              lineHeight: 1.6,
-              color: '#F2EDE6',
-            }}>
-              {testimonials[current].quote}
-            </p>
-            <div style={{ width: 48, height: 1, background: '#C9A46A', margin: '24px auto' }} />
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A46A', fontWeight: 300 }}>
-              {testimonials[current].name}
+              fontSize: 'clamp(26px, 3vw, 42px)',
+              fontWeight: 300, fontStyle: 'italic',
+              color: '#EDE8DF', lineHeight: 1.5,
+              letterSpacing: '-0.01em', marginBottom: 60,
+            }}>{t.quote}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 400, color: '#EDE8DF', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6 }}>{t.name}</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: 'rgba(237,232,223,0.35)', fontWeight: 300 }}>{t.location} · {t.project}</div>
+              </div>
+              <div style={{ display: 'flex', gap: 4 }}>
+                {[...Array(5)].map((_, i) => <span key={i} style={{ color: '#C2A87A', fontSize: 14 }}>★</span>)}
+              </div>
             </div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: '#5A5248', marginTop: 4, fontWeight: 300 }}>
-              {testimonials[current].location}
-            </div>
-            <div style={{ letterSpacing: 3, color: '#C9A46A', marginTop: 12, fontSize: 14 }}>★★★★★</div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 40 }}>
+        <div style={{ display: 'flex', gap: 10, marginTop: 64 }}>
           {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: '50%',
-                border: '1px solid rgba(201,164,106,0.4)',
-                background: i === current ? '#C9A46A' : 'transparent',
-                cursor: 'pointer',
-                padding: 0,
-                transition: 'all 0.3s ease',
-              }}
-            />
+            <button key={i} onClick={() => setIndex(i)} style={{
+              width: i === index ? 32 : 6, height: 6,
+              background: i === index ? '#C2A87A' : 'rgba(194,168,122,0.2)',
+              border: 'none', cursor: 'pointer',
+              transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+            }} />
           ))}
         </div>
       </div>

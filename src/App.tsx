@@ -10,7 +10,7 @@ import Testimonials from './components/Testimonials'
 import MarqueeTicker from './components/MarqueeTicker'
 import Footer from './components/Footer'
 
-function App() {
+export default function App() {
   return (
     <>
       <Nav />
@@ -27,5 +27,3 @@ function App() {
     </>
   )
 }
-
-export default App

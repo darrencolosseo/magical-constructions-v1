@@ -1,84 +1,60 @@
-import { useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 
-function Counter({ target, suffix }: { target: number; suffix: string }) {
+function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true })
 
   useEffect(() => {
     if (!inView) return
-    let start = 0
-    const duration = 2000
-    const increment = target / (duration / 16)
-    const timer = setInterval(() => {
-      start += increment
-      if (start >= target) {
-        setCount(target)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(start))
-      }
-    }, 16)
-    return () => clearInterval(timer)
+    const duration = 2400
+    const start = performance.now()
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1)
+      const ease = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(ease * target))
+      if (progress < 1) requestAnimationFrame(animate)
+    }
+    requestAnimationFrame(animate)
   }, [inView, target])
 
   return <span ref={ref}>{count}{suffix}</span>
 }
 
-const stats = [
-  { number: 150, suffix: '+', label: 'Projects Completed' },
-  { number: 8, suffix: '+', label: 'Years Experience' },
-  { number: 100, suffix: '%', label: 'Sydney-Based' },
-  { number: 5, suffix: '★', label: 'Google Rated' },
-]
-
 export default function StatsBar() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const stats = [
+    { value: 150, suffix: '+', label: 'Projects Completed', sub: 'Across greater Sydney' },
+    { value: 8, suffix: '+', label: 'Years Experience', sub: 'Est. 2020' },
+    { value: 100, suffix: '%', label: 'Sydney Based', sub: 'Local crew, always' },
+    { value: 5, suffix: '★', label: 'Google Rating', sub: 'Verified reviews' },
+  ]
+
   return (
-    <div
-      style={{
-        background: '#0D0B09',
-        borderTop: '1px solid rgba(242,237,230,0.08)',
-        borderBottom: '1px solid rgba(242,237,230,0.08)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-      }}
-    >
-      {stats.map((stat, i) => (
-        <div
-          key={stat.label}
-          style={{
-            padding: '64px 24px',
-            textAlign: 'center',
-            ...(i > 0 && { borderLeft: '1px solid rgba(242,237,230,0.08)' }),
-          }}
-        >
-          <div
+    <section ref={ref} style={{ background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.08)', borderBottom: '1px solid rgba(194,168,122,0.08)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        {stats.map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 60,
-              fontWeight: 300,
-              color: '#EDE8E0',
-              lineHeight: 1,
+              padding: '56px 52px',
+              borderRight: i < 3 ? '1px solid rgba(194,168,122,0.06)' : 'none',
             }}
           >
-            <Counter target={stat.number} suffix={stat.suffix} />
-          </div>
-          <div
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 10,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: '#7A7268',
-              fontWeight: 300,
-              marginTop: 12,
-            }}
-          >
-            {stat.label}
-          </div>
-        </div>
-      ))}
-    </div>
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 64, fontWeight: 300, color: '#C2A87A', lineHeight: 1, marginBottom: 14 }}>
+              {inView ? <Counter target={stat.value} suffix={stat.suffix} /> : `0${stat.suffix}`}
+            </div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,232,223,0.4)', fontWeight: 400, marginBottom: 6 }}>{stat.label}</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: 'rgba(194,168,122,0.5)', fontWeight: 300 }}>{stat.sub}</div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
   )
 }

@@ -1,62 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap');
 
-@import "tailwindcss";
+@tailwind base;
+@tailwind utilities;
 
-:root {
-  --bg: #0D0B09;
-  --surface: #131109;
-  --gold: #C2A87A;
-}
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
 
 body {
-  background-color: var(--bg);
-  color: #F2EDE6;
+  background: #0A0805;
+  color: #EDE8DF;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   line-height: 1.75;
-  position: relative;
+  overflow-x: hidden;
 }
 
+/* Subtle warm grain */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.022;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: overlay;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
 }
 
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #0D0B09; }
-::-webkit-scrollbar-thumb { background: rgba(201,164,106,0.35); }
-::-webkit-scrollbar-thumb:hover { background: #C9A46A; }
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #0A0805; }
+::-webkit-scrollbar-thumb { background: #C2A87A; }
 
-.label-caps {
+.serif { font-family: 'Cormorant Garamond', serif; }
+
+.label-sm {
   font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #8A7A6A;
+  color: #6B5E4A;
 }
 
-.gold-line-left::before {
+.gold-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.gold-line::before {
   content: '';
-  display: inline-block;
-  width: 24px;
+  display: block;
+  width: 32px;
   height: 1px;
-  background: #C9A46A;
-  margin-right: 12px;
-  vertical-align: middle;
+  background: #C2A87A;
+  flex-shrink: 0;
 }
 
-@keyframes marquee-scroll {
-  0% { transform: translateX(0) }
-  100% { transform: translateX(-50%) }
+img { display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* Premium button — gold fill slides in */
+.btn-gold {
+  display: inline-block;
+  background: linear-gradient(135deg, #C2A87A 0%, #A8895A 100%);
+  color: #0A0805;
+  padding: 16px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
 }
+.btn-gold:hover {
+  box-shadow: 0 8px 40px rgba(194,168,122,0.3);
+}
+
+.btn-outline-gold {
+  display: inline-block;
+  border: 1px solid rgba(194,168,122,0.4);
+  color: #C2A87A;
+  padding: 16px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+}
+.btn-outline-gold:hover {
+  border-color: #C2A87A;
+  background: rgba(194,168,122,0.08);
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 50s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }

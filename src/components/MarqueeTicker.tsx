@@ -1,40 +1,15 @@
 export default function MarqueeTicker() {
-  const text = "COMPOSITE DECKING · HARDWOOD DECKING · ALUMINIUM CLADDING · ALFRESCO KITCHENS · FACADE BUILDS · INTERIOR RENOVATIONS · CUSTOM BUILDS · SYDNEY · "
+  const items = ['Composite Decking', 'Hardwood Decking', 'Cladding & Facades', 'Alfresco Kitchens', 'Interior Renovations', 'Full Builds', 'Pool Surrounds', 'Batten Screens']
+  const repeated = [...items, ...items]
 
   return (
-    <div style={{
-      background: '#0D0B09',
-      borderTop: '1px solid rgba(255,255,255,0.06)',
-      borderBottom: '1px solid rgba(255,255,255,0.06)',
-      height: 48,
-      overflow: 'hidden',
-      display: 'flex',
-      alignItems: 'center',
-    }}>
-      <div
-        style={{
-          display: 'flex',
-          animation: 'marquee-scroll 60s linear infinite',
-          whiteSpace: 'nowrap',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
-        onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
-      >
-        {[text, text].map((t, i) => (
-          <span
-            key={i}
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 10,
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase',
-              color: 'rgba(180,165,140,0.35)',
-              fontWeight: 300,
-              paddingRight: 40,
-            }}
-          >
-            {t}
-          </span>
+    <div style={{ background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.08)', borderBottom: '1px solid rgba(194,168,122,0.08)', padding: '22px 0', overflow: 'hidden' }}>
+      <div className="marquee-track" style={{ display: 'flex', gap: 0, width: 'max-content' }}>
+        {repeated.map((item, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', paddingRight: 64 }}>
+            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,232,223,0.25)', whiteSpace: 'nowrap', letterSpacing: '0.02em' }}>{item}</span>
+            <span style={{ marginLeft: 64, width: 4, height: 4, borderRadius: '50%', background: 'rgba(194,168,122,0.3)', display: 'inline-block', flexShrink: 0 }} />
+          </div>
         ))}
       </div>
     </div>

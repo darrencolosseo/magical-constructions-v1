@@ -1,82 +1,53 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const steps = [
-  { num: '01', title: 'Free Consultation', desc: 'We discuss your vision, timeline and budget — no obligations, no pressure.' },
-  { num: '02', title: 'Detailed Quote', desc: 'You receive a precise itemised quote within 48 hours of our site visit.' },
-  { num: '03', title: 'Precision Build', desc: 'Our team executes with meticulous attention to every detail and finish.' },
-  { num: '04', title: 'Final Handover', desc: "We walk the project with you and won't leave until you're completely satisfied." },
+  { num: '01', title: 'Free Consultation', desc: 'We visit your site, understand your vision and discuss your budget — no obligations, no fees.' },
+  { num: '02', title: 'Detailed Quote', desc: 'A comprehensive, itemised quote delivered within 48 hours. No hidden costs, no surprises.' },
+  { num: '03', title: 'Precision Build', desc: 'Our experienced tradespeople execute with meticulous attention to detail and daily updates.' },
+  { num: '04', title: 'Final Handover', desc: 'A thorough walkthrough, complete documentation, and ongoing support after completion.' },
 ]
 
 export default function ProcessSteps() {
-  return (
-    <section style={{ background: '#0B0A08', padding: '140px 48px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: 64 }}
-        >
-          <div className="label-caps" style={{ marginBottom: 16 }}>How We Work</div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 52, fontWeight: 300, color: '#F2EDE6' }}>
-            From First Call to Final Finish
-          </h2>
-        </motion.div>
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, position: 'relative' }}>
-          {steps.map((step, i) => (
-            <div
-              key={step.num}
-              style={{
-                borderTop: '1px solid rgba(255,255,255,0.04)',
-                borderBottom: '1px solid rgba(255,255,255,0.04)',
-                borderRight: '1px solid rgba(255,255,255,0.04)',
-                ...(i === 0 && { borderLeft: '1px solid rgba(255,255,255,0.04)' }),
-                position: 'relative',
-              }}
-            >
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              style={{
-                background: 'rgba(201,164,106,0.02)',
-                padding: '44px 36px',
-              }}
-            >
-              <div style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 88,
-                fontWeight: 200,
-                color: 'rgba(201,164,106,0.2)',
-                lineHeight: 1,
-              }}>
-                {step.num}
-              </div>
-              <div style={{ width: 32, height: 1, background: '#C9A46A', margin: '16px 0' }} />
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#F2EDE6', fontWeight: 300 }}>
-                {step.title}
-              </div>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, lineHeight: 1.75, color: '#9A9088', marginTop: 12, fontWeight: 300 }}>
-                {step.desc}
-              </p>
-              {i < steps.length - 1 && (
-                <div style={{
-                  position: 'absolute',
-                  right: -16,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'rgba(201,164,106,0.4)',
-                  fontSize: 20,
-                  zIndex: 10,
-                }}>→</div>
-              )}
-            </motion.div>
-            </div>
-          ))}
+  return (
+    <section id="process" style={{ padding: '140px 80px', background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
+      <div ref={ref} style={{ marginBottom: 88 }}>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
+          How We Work
+        </motion.div>
+        <div style={{ overflow: 'hidden' }}>
+          <motion.h2 initial={{ y: '100%' }} animate={inView ? { y: 0 } : {}} transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(44px, 5vw, 72px)', fontWeight: 300, color: '#EDE8DF', lineHeight: 1.05 }}>
+            From first call<br /><em style={{ color: '#C2A87A' }}>to final finish.</em>
+          </motion.h2>
         </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, position: 'relative' }}>
+        {/* Connecting gold line */}
+        <motion.div
+          initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ position: 'absolute', top: 28, left: '12.5%', right: '12.5%', height: 1, background: 'linear-gradient(to right, #C2A87A, rgba(194,168,122,0.3))', transformOrigin: 'left', zIndex: 0 }}
+        />
+
+        {steps.map((step, i) => (
+          <motion.div key={i}
+            initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.5 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+            style={{ paddingRight: i < 3 ? 48 : 0, paddingLeft: i > 0 ? 48 : 0, position: 'relative' }}
+          >
+            {/* Number circle */}
+            <div style={{ width: 56, height: 56, borderRadius: '50%', border: '1px solid rgba(194,168,122,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 44, background: '#0D0B08', position: 'relative', zIndex: 1 }}>
+              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 400, color: '#C2A87A' }}>{step.num}</span>
+            </div>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 400, color: '#EDE8DF', marginBottom: 18, lineHeight: 1.2 }}>{step.title}</h3>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.8 }}>{step.desc}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   )
