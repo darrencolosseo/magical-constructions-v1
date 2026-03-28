@@ -27,29 +27,25 @@ export default function ProcessSteps() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, position: 'relative' }}>
-        {/* Connecting gold line */}
+        {/* Connecting gold line — runs from center of circle 01 to center of circle 04 */}
         <motion.div
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: 'absolute', top: 28, left: '12.5%', right: '12.5%', height: 1, background: 'linear-gradient(to right, #C2A87A, rgba(194,168,122,0.3))', transformOrigin: 'left', zIndex: 0 }}
+          style={{ position: 'absolute', top: 28, left: 28, right: 'calc(25% - 28px)', height: 1, background: 'linear-gradient(to right, #C2A87A, rgba(194,168,122,0.3))', transformOrigin: 'left', zIndex: 0 }}
         />
 
         {steps.map((step, i) => (
           <motion.div key={i}
             initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.5 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}
+            style={{ position: 'relative' }}
           >
-            {/* Number circle — centered in column so it aligns with the connecting line */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 44, position: 'relative', zIndex: 1 }}>
-              <div style={{ width: 56, height: 56, borderRadius: '50%', border: '1px solid rgba(194,168,122,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0D0B08' }}>
-                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 400, color: '#C2A87A' }}>{step.num}</span>
-              </div>
+            {/* Number circle — left-aligned to match text below */}
+            <div style={{ width: 56, height: 56, borderRadius: '50%', border: '1px solid rgba(194,168,122,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 44, background: '#0D0B08', position: 'relative', zIndex: 1 }}>
+              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 400, color: '#C2A87A' }}>{step.num}</span>
             </div>
-            <div style={{ paddingRight: i < 3 ? 40 : 0, paddingLeft: i > 0 ? 40 : 0 }}>
-              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 400, color: '#EDE8DF', marginBottom: 18, lineHeight: 1.2 }}>{step.title}</h3>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.8 }}>{step.desc}</p>
-            </div>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 400, color: '#EDE8DF', marginBottom: 18, lineHeight: 1.2, paddingRight: i < 3 ? 32 : 0 }}>{step.title}</h3>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.8, paddingRight: i < 3 ? 32 : 0 }}>{step.desc}</p>
           </motion.div>
         ))}
       </div>
