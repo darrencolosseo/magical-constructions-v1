@@ -18,12 +18,12 @@ export default function WhyUs() {
   const imgInView = useInView(imgRef, { once: true, margin: '-60px' })
 
   return (
-    <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: '#0A0805' }}>
+    <section className="rsp-why" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: '#0A0805' }}>
       {/* Left image with parallax feel */}
       <motion.div ref={imgRef}
         initial={{ opacity: 0, scale: 1.04 }} animate={imgInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        style={{ minHeight: 680, overflow: 'hidden', position: 'relative' }}
+        className="rsp-why-img" style={{ minHeight: 680, overflow: 'hidden', position: 'relative' }}
       >
         <img src="/images/extra-facade-01.jpg" alt="Magical Constructions quality" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 70%, #0A0805 100%)' }} />

@@ -3,7 +3,7 @@ import { Globe, Mail, MapPin, Phone } from 'lucide-react'
 export default function Footer() {
   return (
     <footer style={{ background: '#060402', borderTop: '1px solid rgba(194,168,122,0.08)' }}>
-      <div style={{ padding: '100px 80px 64px', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 80, borderBottom: '1px solid rgba(194,168,122,0.06)' }}>
+      <div className="rsp-footer" style={{ padding: '100px 80px 64px', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 80, borderBottom: '1px solid rgba(194,168,122,0.06)' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
             <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 400, color: '#C2A87A' }}>MC</span>
@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div style={{ padding: '28px 80px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="rsp-footer-bar" style={{ padding: '28px 80px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: 'rgba(237,232,223,0.18)', fontWeight: 300 }}>© 2026 Magical Constructions. All rights reserved.</span>
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: 'rgba(237,232,223,0.18)', fontWeight: 300 }}>ABN: XX XXX XXX XXX</span>
       </div>

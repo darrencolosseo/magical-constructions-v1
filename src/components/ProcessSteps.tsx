@@ -13,7 +13,7 @@ export default function ProcessSteps() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="process" style={{ padding: '140px 80px', background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
+    <section id="process" className="rsp-section" style={{ padding: '140px 80px', background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
       <div ref={ref} style={{ marginBottom: 88 }}>
         <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
           How We Work
@@ -26,12 +26,12 @@ export default function ProcessSteps() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, position: 'relative' }}>
+      <div className="rsp-process" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, position: 'relative' }}>
         {/* Connecting gold line — runs from center of circle 01 to center of circle 04 */}
         <motion.div
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: 'absolute', top: 28, left: 28, right: 'calc(25% - 28px)', height: 1, background: 'linear-gradient(to right, #C2A87A, rgba(194,168,122,0.3))', transformOrigin: 'left', zIndex: 0 }}
+          className="rsp-process-line" style={{ position: 'absolute', top: 28, left: 28, right: 'calc(25% - 28px)', height: 1, background: 'linear-gradient(to right, #C2A87A, rgba(194,168,122,0.3))', transformOrigin: 'left', zIndex: 0 }}
         />
 
         {steps.map((step, i) => (

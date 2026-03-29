@@ -104,3 +104,35 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .marquee-track { animation: marquee 50s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 900px) {
+  .rsp-section    { padding: 80px 32px !important; }
+  .rsp-hero       { padding: 0 32px !important; }
+  .rsp-grid-3     { grid-template-columns: repeat(2, 1fr) !important; }
+  .rsp-grid-4     { grid-template-columns: repeat(2, 1fr) !important; }
+  .rsp-grid-2     { grid-template-columns: 1fr !important; }
+  .rsp-header     { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+  .rsp-footer     { grid-template-columns: 1fr 1fr !important; gap: 48px !important; }
+  .rsp-why        { grid-template-columns: 1fr !important; }
+  .rsp-why-img    { min-height: 400px !important; }
+  .rsp-process    { grid-template-columns: repeat(2, 1fr) !important; gap: 48px !important; }
+  .rsp-process-line { display: none !important; }
+  .rsp-form-inner { grid-template-columns: 1fr !important; }
+  .rsp-quote-grid { grid-template-columns: 1fr !important; }
+  .rsp-quote-left { padding: 80px 32px 40px !important; border-right: none !important; border-bottom: 1px solid rgba(194,168,122,0.07) !important; }
+  .rsp-quote-right { padding: 40px 32px 80px !important; }
+  .rsp-footer-bar { padding: 24px 32px !important; flex-direction: column !important; gap: 8px !important; }
+  .rsp-stats-item { padding: 40px 28px !important; }
+  .service-card   { height: 320px !important; }
+}
+
+@media (max-width: 600px) {
+  .rsp-section    { padding: 64px 20px !important; }
+  .rsp-hero       { padding: 0 20px !important; }
+  .rsp-grid-3     { grid-template-columns: 1fr !important; }
+  .rsp-grid-4     { grid-template-columns: repeat(2, 1fr) !important; }
+  .rsp-footer     { grid-template-columns: 1fr !important; }
+  .rsp-process    { grid-template-columns: 1fr !important; }
+  .rsp-footer-bar { flex-direction: column !important; gap: 6px !important; align-items: flex-start !important; }
+}

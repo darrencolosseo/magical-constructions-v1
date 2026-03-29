@@ -17,11 +17,11 @@ const items = [
   { img: '/images/gallery-10.jpg', title: 'Composite Deck Detail', suburb: 'Mosman', cat: 'decking' },
 
   // — Deck Replacement: Before & After (same job) —
-  { img: '/images/gallery-17.jpg', title: 'Deck Replacement — Before', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-18.jpg', title: 'Deck Replacement — Before', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-11.jpg', title: 'Deck Replacement — Progress', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-16.jpg', title: 'Deck Replacement — Progress', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-15.jpg', title: 'Deck Replacement — After', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-17.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-18.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-11.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-16.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-15.jpg', title: 'Deck Replacement: After', suburb: 'Pyrmont', cat: 'decking' },
 
   // — Hardwood Decking —
   { img: '/images/gallery-03.jpg', title: 'Hardwood Deck', suburb: 'Cremorne', cat: 'decking' },
@@ -48,7 +48,7 @@ export default function Gallery() {
   const filtered = active === 'All' ? items : items.filter(i => i.cat === active.toLowerCase())
 
   return (
-    <section id="projects" style={{ padding: '140px 80px', background: '#0A0805', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
+    <section id="projects" className="rsp-section" style={{ padding: '140px 80px', background: '#0A0805', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
       <div ref={ref} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64 }}>
         <div>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
@@ -75,7 +75,7 @@ export default function Gallery() {
         </motion.div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridAutoRows: '320px', gap: 2 }}>
+      <div className="rsp-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridAutoRows: '320px', gap: 2 }}>
         <AnimatePresence mode="popLayout">
           {filtered.map((item) => (
             <motion.div key={item.img} layout

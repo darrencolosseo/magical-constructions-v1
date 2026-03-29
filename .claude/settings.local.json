@@ -37,7 +37,8 @@
       "Bash(npx vercel:*)",
       "Bash(brew install:*)",
       "Bash(ls \"/Users/darren/Desktop/Example Website/\"*.json)",
-      "Bash(grep -rn — '/Users/darren/Desktop/Example Website/src/' --include=*.tsx --include=*.ts --include=*.css)"
+      "Bash(grep -rn — '/Users/darren/Desktop/Example Website/src/' --include=*.tsx --include=*.ts --include=*.css)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }

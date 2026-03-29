@@ -22,7 +22,7 @@ export default function Hero() {
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 20% 60%, rgba(194,168,122,0.05) 0%, transparent 60%)' }} />
 
       {/* Content */}
-      <motion.div style={{ position: 'relative', zIndex: 10, padding: '0 80px', maxWidth: 960, y: textY, opacity }}>
+      <motion.div className="rsp-hero" style={{ position: 'relative', zIndex: 10, padding: '0 80px', maxWidth: 960, y: textY, opacity }}>
         {/* Label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}

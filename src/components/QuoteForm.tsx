@@ -44,9 +44,9 @@ export default function QuoteForm() {
 
   return (
     <section id="quote" style={{ background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.07)' }} ref={ref}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 720 }}>
+      <div className="rsp-quote-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 720 }}>
         {/* Left */}
-        <div style={{ padding: '120px 80px', borderRight: '1px solid rgba(194,168,122,0.07)' }}>
+        <div className="rsp-quote-left" style={{ padding: '120px 80px', borderRight: '1px solid rgba(194,168,122,0.07)' }}>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
             Get in Touch
           </motion.div>
@@ -94,7 +94,7 @@ export default function QuoteForm() {
 
         {/* Right */}
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
-          style={{ padding: '120px 80px' }}>
+          className="rsp-quote-right" style={{ padding: '120px 80px' }}>
           {submitted ? (
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 24 }}>
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 56, fontWeight: 300, color: '#C2A87A' }}>Thank you.</div>
@@ -104,7 +104,7 @@ export default function QuoteForm() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+              <div className="rsp-form-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
                 <div>
                   <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Full Name</label>
                   <input {...register('name', { required: true })} placeholder="Your name" style={{ ...inputStyle, borderBottomColor: errors.name ? '#C27A5A' : 'rgba(194,168,122,0.2)' }} />
@@ -114,7 +114,7 @@ export default function QuoteForm() {
                   <input {...register('email', { required: true })} type="email" placeholder="your@email.com" style={{ ...inputStyle, borderBottomColor: errors.email ? '#C27A5A' : 'rgba(194,168,122,0.2)' }} />
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+              <div className="rsp-form-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
                 <div>
                   <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Phone</label>
                   <input {...register('phone')} placeholder="04xx xxx xxx" style={inputStyle} />

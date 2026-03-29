@@ -2,12 +2,12 @@ import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const services = [
-  { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/extra-deck-composite-01.jpg', desc: 'Large-format boards, pool surrounds and precision framing built to last decades.' },
-  { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/extra-deck-hardwood-01.jpg', desc: 'Spotted gum, blackbutt and ironbark. Sourced, cut and finished on-site.' },
-  { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/extra-facade-01.jpg', desc: 'Aluminium batten, fibre cement and timber cladding that transforms your home from the street.' },
-  { title: 'Interior Renovations', category: 'Interiors', img: '/images/extra-fireplace-01.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
-  { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/extra-alfresco-01.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
-  { title: 'Full Builds', category: 'Construction', img: '/images/service-builds.jpg', desc: 'End-to-end project management for extensions, granny flats and new builds.' },
+  { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/gallery-06.jpg', desc: 'Large-format boards, pool surrounds and precision framing built to last decades.' },
+  { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/gallery-04.jpg', desc: 'Spotted gum, blackbutt and ironbark. Sourced, cut and finished on-site.' },
+  { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/gallery-20.jpg', desc: 'Aluminium batten, fibre cement and timber cladding that transforms your home from the street.' },
+  { title: 'Interior Renovations', category: 'Interiors', img: '/images/gallery-22.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
+  { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/gallery-14.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
+  { title: 'Full Builds', category: 'Construction', img: '/images/gallery-20.jpg', desc: 'End-to-end project management for extensions, granny flats and new builds.' },
 ]
 
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
@@ -63,8 +63,8 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="services" style={{ padding: '140px 80px', background: '#0A0805' }}>
-      <div ref={ref} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 72 }}>
+    <section id="services" className="rsp-section" style={{ padding: '140px 80px', background: '#0A0805' }}>
+      <div ref={ref} className="rsp-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 72 }}>
         <div>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="gold-line label-sm" style={{ marginBottom: 28 }}>
             What We Build
@@ -81,7 +81,7 @@ export default function Services() {
           From the first site visit to the final coat of oil, we manage every aspect of your project with precision and care.
         </motion.p>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+      <div className="rsp-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
         {services.map((s, i) => <ServiceCard key={i} service={s} index={i} />)}
       </div>
     </section>

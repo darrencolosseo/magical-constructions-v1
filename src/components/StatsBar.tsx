@@ -35,13 +35,14 @@ export default function StatsBar() {
 
   return (
     <section ref={ref} style={{ background: '#0D0B08', borderTop: '1px solid rgba(194,168,122,0.08)', borderBottom: '1px solid rgba(194,168,122,0.08)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+      <div className="rsp-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
         {stats.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="rsp-stats-item"
             style={{
               padding: '56px 52px',
               borderRight: i < 3 ? '1px solid rgba(194,168,122,0.06)' : 'none',
