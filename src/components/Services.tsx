@@ -2,11 +2,11 @@ import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const services = [
-  { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/service-decking-composite.jpg', desc: 'Large-format boards, pool surrounds & precision framing built to last decades.' },
-  { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/service-decking-hardwood.jpg', desc: 'Spotted gum, blackbutt & ironbark — sourced, cut and finished on-site.' },
-  { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/service-cladding.jpg', desc: "Aluminium batten, fibre cement & timber — transforming your home's first impression." },
-  { title: 'Interior Renovations', category: 'Interiors', img: '/images/service-interior.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
-  { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/service-alfresco.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
+  { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/extra-deck-composite-01.jpg', desc: 'Large-format boards, pool surrounds and precision framing built to last decades.' },
+  { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/extra-deck-hardwood-01.jpg', desc: 'Spotted gum, blackbutt and ironbark. Sourced, cut and finished on-site.' },
+  { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/extra-facade-01.jpg', desc: 'Aluminium batten, fibre cement and timber cladding that transforms your home from the street.' },
+  { title: 'Interior Renovations', category: 'Interiors', img: '/images/extra-fireplace-01.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
+  { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/extra-alfresco-01.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
   { title: 'Full Builds', category: 'Construction', img: '/images/service-builds.jpg', desc: 'End-to-end project management for extensions, granny flats and new builds.' },
 ]
 

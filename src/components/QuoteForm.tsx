@@ -10,6 +10,8 @@ export default function QuoteForm() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
 
   const inputStyle = {
@@ -17,6 +19,27 @@ export default function QuoteForm() {
     borderBottom: '1px solid rgba(194,168,122,0.2)',
     padding: '14px 0', fontFamily: "'Inter', sans-serif", fontSize: 14,
     color: '#EDE8DF', fontWeight: 300, outline: 'none', transition: 'border-color 0.3s ease',
+  }
+
+  const onSubmit = async (data: FormData) => {
+    setSending(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please call us directly on 0427 731 552.')
+      }
+    } catch {
+      setError('Unable to send. Please call us on 0427 731 552 or email magicalconstructions@gmail.com')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -34,19 +57,37 @@ export default function QuoteForm() {
             </motion.h2>
           </div>
           <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.4 }}
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.85, marginBottom: 52, maxWidth: 380 }}>
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.4)', fontWeight: 300, lineHeight: 1.85, marginBottom: 48, maxWidth: 380 }}>
             We respond within 24 hours with a detailed, itemised proposal. No hidden costs, no surprises.
           </motion.p>
+
+          {/* Contact details */}
+          <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.5 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 44 }}>
+            <a href="tel:0427731552" style={{ display: 'flex', gap: 14, alignItems: 'center', textDecoration: 'none', transition: 'color 0.3s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#C2A87A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '')}>
+              <div style={{ width: 4, height: 4, background: '#C2A87A', borderRadius: '50%', flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.6)', fontWeight: 300 }}>0427 731 552</span>
+            </a>
+            <a href="mailto:magicalconstructions@gmail.com" style={{ display: 'flex', gap: 14, alignItems: 'center', textDecoration: 'none', transition: 'color 0.3s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#C2A87A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '')}>
+              <div style={{ width: 4, height: 4, background: '#C2A87A', borderRadius: '50%', flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.6)', fontWeight: 300 }}>magicalconstructions@gmail.com</span>
+            </a>
+          </motion.div>
+
           {[
             'Response within 24 hours',
-            'Free site visit & consultation',
+            'Free site visit and consultation',
             'Detailed itemised quote',
             'No obligation',
           ].map((item, i) => (
-            <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.5 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.6 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 18 }}>
               <div style={{ width: 4, height: 4, background: '#C2A87A', borderRadius: '50%', flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.55)', fontWeight: 300 }}>{item}</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.45)', fontWeight: 300 }}>{item}</span>
             </motion.div>
           ))}
         </div>
@@ -58,11 +99,11 @@ export default function QuoteForm() {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 24 }}>
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 56, fontWeight: 300, color: '#C2A87A' }}>Thank you.</div>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(237,232,223,0.5)', fontWeight: 300, lineHeight: 1.8 }}>
-                We'll be in touch within 24 hours with a detailed proposal for your project.
+                We'll be in touch within 24 hours with a detailed proposal for your project. A confirmation has been sent to your email.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(() => setSubmitted(true))} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
                 <div>
                   <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Full Name</label>
@@ -98,8 +139,13 @@ export default function QuoteForm() {
                 <label style={{ display: 'block', fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#6B5E4A', fontWeight: 400, marginBottom: 4 }}>Tell us about your project</label>
                 <textarea {...register('message')} placeholder="Brief description, timeline, budget range..." rows={4} style={{ ...inputStyle, resize: 'none' }} />
               </div>
+              {error && (
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: '#C27A5A', fontWeight: 300 }}>{error}</p>
+              )}
               <div>
-                <button type="submit" className="btn-gold">Submit Request</button>
+                <button type="submit" className="btn-gold" disabled={sending} style={{ opacity: sending ? 0.6 : 1 }}>
+                  {sending ? 'Sending...' : 'Submit Request'}
+                </button>
               </div>
             </form>
           )}

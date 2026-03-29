@@ -3,11 +3,11 @@ import { motion, useInView } from 'framer-motion'
 import { Check } from 'lucide-react'
 
 const items = [
-  'Every job approached like it\'s our own home',
-  'Real project photos — what you see is what you get',
+  "Every job approached like it's our own home",
+  'Real project photos. What you see is what you get.',
   'Sydney-based team, available and accountable',
-  'From concept to completion — we manage it all',
-  'Transparent pricing, no hidden costs, ever',
+  'From concept to completion, we manage it all',
+  'Transparent pricing. No hidden costs, ever.',
   'Workmanship warranty on every project',
 ]
 
@@ -25,7 +25,7 @@ export default function WhyUs() {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         style={{ minHeight: 680, overflow: 'hidden', position: 'relative' }}
       >
-        <img src="/images/why-us.jpg" alt="Magical Constructions quality" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src="/images/extra-facade-01.jpg" alt="Magical Constructions quality" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 70%, #0A0805 100%)' }} />
       </motion.div>
 

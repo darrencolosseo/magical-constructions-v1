@@ -1,4 +1,4 @@
-import { Globe, Mail, MapPin } from 'lucide-react'
+import { Globe, Mail, MapPin, Phone } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -29,8 +29,9 @@ export default function Footer() {
         <div>
           <div style={{ fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(194,168,122,0.4)', marginBottom: 28 }}>Contact</div>
           {[
-            { Icon: Globe, text: '@magicalconstructions', href: 'https://instagram.com/magicalconstructions' },
-            { Icon: Mail, text: 'hello@magicalconstructions.com.au', href: 'mailto:hello@magicalconstructions.com.au' },
+            { Icon: Phone, text: '0427 731 552', href: 'tel:0427731552' },
+            { Icon: Mail, text: 'magicalconstructions@gmail.com', href: 'mailto:magicalconstructions@gmail.com' },
+            { Icon: Globe, text: 'www.magicalconstruction.com.au', href: 'https://www.magicalconstruction.com.au' },
             { Icon: MapPin, text: 'Sydney, NSW', href: '#' },
           ].map(({ Icon, text, href }) => (
             <a key={text} href={href} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.35)', fontWeight: 300, marginBottom: 18, transition: 'color 0.3s ease' }}

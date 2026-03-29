@@ -57,7 +57,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
           style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: 'rgba(237,232,223,0.55)', maxWidth: 500, fontWeight: 300, lineHeight: 1.85, marginBottom: 52, letterSpacing: '0.01em' }}
         >
-          Premium cladding, composite decking & architectural builds — crafted with precision for Sydney's most discerning homes.
+          Premium cladding, composite decking and architectural builds. Crafted with precision for Sydney's most discerning homes.
         </motion.p>
 
         <motion.div

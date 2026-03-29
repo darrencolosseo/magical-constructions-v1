@@ -15,7 +15,7 @@ const testimonials = [
     project: 'Aluminium Facade Cladding',
   },
   {
-    quote: "Responsive, honest, and skilled. They completed our full renovation on time and on budget — something we didn't think was possible. We'll use them for every future project.",
+    quote: "Responsive, honest, and skilled. They completed our full renovation on time and on budget. Something we didn't think was possible. We'll use them for every future project.",
     name: 'Michael T.',
     location: 'Lane Cove, NSW',
     project: 'Interior Renovation & Deck',

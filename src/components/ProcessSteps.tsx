@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const steps = [
-  { num: '01', title: 'Free Consultation', desc: 'We visit your site, understand your vision and discuss your budget — no obligations, no fees.' },
+  { num: '01', title: 'Free Consultation', desc: 'We visit your site, understand your vision and work through your budget together. No obligations, no fees.' },
   { num: '02', title: 'Detailed Quote', desc: 'A comprehensive, itemised quote delivered within 48 hours. No hidden costs, no surprises.' },
   { num: '03', title: 'Precision Build', desc: 'Our experienced tradespeople execute with meticulous attention to detail and daily updates.' },
   { num: '04', title: 'Final Handover', desc: 'A thorough walkthrough, complete documentation, and ongoing support after completion.' },

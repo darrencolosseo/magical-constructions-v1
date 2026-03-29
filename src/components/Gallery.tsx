@@ -2,6 +2,18 @@ import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const items = [
+  { img: '/images/extra-facade-01.jpg', title: 'Modern Facade & Louvre Build', suburb: 'Ryde', cat: 'cladding' },
+  { img: '/images/extra-alfresco-01.jpg', title: 'Curved Alfresco Pavilion', suburb: 'Manly', cat: 'alfresco' },
+  { img: '/images/extra-deck-hardwood-01.jpg', title: 'Hardwood Deck & Landscaping', suburb: 'Neutral Bay', cat: 'decking' },
+  { img: '/images/extra-fireplace-01.jpg', title: 'Fireplace Feature Build', suburb: 'Lane Cove', cat: 'interior' },
+  { img: '/images/extra-deck-composite-01.jpg', title: 'Dark Composite Deck', suburb: 'Northbridge', cat: 'decking' },
+  { img: '/images/extra-joinery-01.jpg', title: 'Custom LED Joinery Wall', suburb: 'Mosman', cat: 'interior' },
+  { img: '/images/extra-pergola-01.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
+  { img: '/images/extra-deck-hardwood-02.jpg', title: 'Hardwood Courtyard Deck', suburb: 'Crows Nest', cat: 'decking' },
+  { img: '/images/extra-fireplace-02.jpg', title: 'Shiplap Fireplace Feature Wall', suburb: 'Willoughby', cat: 'interior' },
+  { img: '/images/extra-deck-hardwood-03.jpg', title: 'Hardwood Entry Deck', suburb: 'Crows Nest', cat: 'decking' },
+  { img: '/images/extra-deck-composite-02.jpg', title: 'Composite Deck Courtyard', suburb: 'Northbridge', cat: 'decking' },
+  { img: '/images/extra-ceiling-01.jpg', title: 'Timber Slat Ceiling Cladding', suburb: 'Northbridge', cat: 'cladding' },
   { img: '/images/gallery-01.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
   { img: '/images/gallery-02.jpg', title: 'Hardwood Entertainer', suburb: 'Balmoral', cat: 'decking' },
   { img: '/images/gallery-03.jpg', title: 'Aluminium Facade', suburb: 'Northwood', cat: 'cladding' },
