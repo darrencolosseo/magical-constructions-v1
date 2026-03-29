@@ -41,19 +41,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   `
 
   try {
-    // Notify the business
+    // Notify business — sent to Resend account email (darrenxian1@gmail.com) until domain verified
+    // Once magicalconstruction.com.au is verified in Resend, update from + to to the proper addresses
     await resend.emails.send({
       from: 'Magical Constructions <onboarding@resend.dev>',
-      to: 'magicalconstructions@gmail.com',
+      to: ['darrenxian1@gmail.com'],
       reply_to: email,
       subject: `New Quote: ${service || 'General'} — ${name} (${suburb || 'NSW'})`,
       html: businessHtml,
     })
 
-    // Confirm to the customer
+    // Customer confirmation
     await resend.emails.send({
       from: 'Magical Constructions <onboarding@resend.dev>',
-      to: email,
+      to: ['darrenxian1@gmail.com'],
       subject: 'Your quote request has been received',
       html: customerHtml,
     })
