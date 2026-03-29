@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 type FormData = { name: string; email: string; phone: string; suburb: string; service: string; message: string }
 
-const services = ['Composite Decking', 'Hardwood Decking', 'Cladding / Facade', 'Interior Renovation', 'Alfresco Kitchen', 'Full Build']
+const services = ['Composite Decking', 'Hardwood Decking', 'Cladding / Facade', 'Interior Fix Outs', 'Alfresco Kitchen', 'Custom Front Doors']
 
 export default function QuoteForm() {
   const ref = useRef(null)
