@@ -1,18 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const { name, email, phone, suburb, service, message } = req.body
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
-    },
-  })
 
   const businessHtml = `
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background: #0A0805; color: #EDE8DF; padding: 40px; border: 1px solid #C2A87A;">
@@ -33,30 +27,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background: #0A0805; color: #EDE8DF; padding: 40px; border: 1px solid #C2A87A;">
       <h1 style="color: #C2A87A; font-size: 28px; font-weight: 300; margin-bottom: 8px;">Thank you, ${name}.</h1>
       <p style="color: rgba(237,232,223,0.6); font-size: 15px; line-height: 1.8; margin-bottom: 32px;">We've received your request and will be in touch within 24 hours with a detailed, itemised proposal for your project.</p>
-      <div style="border-top: 1px solid rgba(194,168,122,0.2); padding-top: 28px; margin-top: 8px;">
+      <div style="border-top: 1px solid rgba(194,168,122,0.2); padding-top: 28px;">
         <p style="color: rgba(237,232,223,0.4); font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;">Your Request Summary</p>
         <p style="font-size: 14px; color: rgba(237,232,223,0.7); margin: 6px 0;"><strong style="color: #C2A87A;">Service:</strong> ${service || 'To be discussed'}</p>
         <p style="font-size: 14px; color: rgba(237,232,223,0.7); margin: 6px 0;"><strong style="color: #C2A87A;">Location:</strong> ${suburb || 'To be discussed'}</p>
         ${message ? `<p style="font-size: 14px; color: rgba(237,232,223,0.7); margin: 6px 0;"><strong style="color: #C2A87A;">Your note:</strong> ${message}</p>` : ''}
       </div>
       <div style="border-top: 1px solid rgba(194,168,122,0.1); padding-top: 28px; margin-top: 32px;">
-        <p style="color: rgba(237,232,223,0.4); font-size: 13px; line-height: 1.7;">Any questions in the meantime? Reach us at <a href="mailto:magicalconstructions@gmail.com" style="color: #C2A87A;">magicalconstructions@gmail.com</a> or call <a href="tel:0427731552" style="color: #C2A87A;">0427 731 552</a>.</p>
+        <p style="color: rgba(237,232,223,0.4); font-size: 13px; line-height: 1.7;">Any questions? Reach us at <a href="mailto:magicalconstructions@gmail.com" style="color: #C2A87A;">magicalconstructions@gmail.com</a> or call <a href="tel:0427731552" style="color: #C2A87A;">0427 731 552</a>.</p>
         <p style="color: rgba(194,168,122,0.6); font-size: 13px; font-style: italic; margin-top: 24px;">Magical Constructions &bull; Sydney, NSW</p>
       </div>
     </div>
   `
 
   try {
-    await transporter.sendMail({
-      from: `"Magical Constructions" <${process.env.GMAIL_USER}>`,
+    // Notify the business
+    await resend.emails.send({
+      from: 'Magical Constructions <onboarding@resend.dev>',
       to: 'magicalconstructions@gmail.com',
-      subject: `New Quote Request: ${service || 'General'} — ${name} (${suburb || 'NSW'})`,
+      reply_to: email,
+      subject: `New Quote: ${service || 'General'} — ${name} (${suburb || 'NSW'})`,
       html: businessHtml,
-      replyTo: email,
     })
 
-    await transporter.sendMail({
-      from: `"Magical Constructions" <${process.env.GMAIL_USER}>`,
+    // Confirm to the customer
+    await resend.emails.send({
+      from: 'Magical Constructions <onboarding@resend.dev>',
       to: email,
       subject: 'Your quote request has been received',
       html: customerHtml,
@@ -64,7 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json({ success: true })
   } catch (err) {
-    console.error('Email error:', err)
+    console.error('Resend error:', err)
     res.status(500).json({ error: 'Failed to send email' })
   }
 }
