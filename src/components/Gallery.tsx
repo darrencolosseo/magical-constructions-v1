@@ -93,21 +93,25 @@ export default function Gallery() {
       </div>
 
       <div className="rsp-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridAutoRows: '320px', gap: 2 }}>
-        <AnimatePresence mode="popLayout">
-          {filtered.map((item) => (
-            <motion.div key={item.img} layout
-              initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{ position: 'relative', overflow: 'hidden', height: '320px', cursor: 'pointer' }}
-              whileHover="hover"
+        <AnimatePresence mode="sync">
+          {filtered.map((item, i) => (
+            <motion.div key={item.img}
+              initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'relative', overflow: 'hidden', height: '320px', cursor: 'pointer', willChange: 'transform' }}
+              className="gallery-card"
             >
-              <motion.img variants={{ hover: { scale: 1.06 } }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <motion.div variants={{ hover: { opacity: 1 } }} initial={{ opacity: 0 }} transition={{ duration: 0.35 }}
-                style={{ position: 'absolute', inset: 0, background: 'rgba(10,8,5,0.75)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 28 }}>
+              <img
+                src={item.img} alt={item.title}
+                loading={i < 6 ? 'eager' : 'lazy'} decoding="async"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }}
+                className="gallery-img"
+              />
+              <div className="gallery-overlay"
+                style={{ position: 'absolute', inset: 0, background: 'rgba(10,8,5,0.75)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 28, opacity: 0, transition: 'opacity 0.35s ease' }}>
                 <div className="label-sm" style={{ color: '#C2A87A', marginBottom: 6 }}>{item.suburb}</div>
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 400, color: '#EDE8DF' }}>{item.title}</div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>

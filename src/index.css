@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: auto; }
+html { scroll-behavior: smooth; }
 
 body {
   background: #0A0805;
@@ -13,6 +13,13 @@ body {
   font-weight: 300;
   line-height: 1.75;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  image-rendering: auto;
 }
 
 /* Subtle warm grain */
@@ -57,7 +64,6 @@ body::before {
   flex-shrink: 0;
 }
 
-img { display: block; }
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
@@ -96,6 +102,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: #C2A87A;
   background: rgba(194,168,122,0.08);
 }
+
+/* Gallery hover — pure CSS for GPU-smooth transitions */
+.gallery-card:hover .gallery-img { transform: scale(1.06); }
+.gallery-card:hover .gallery-overlay { opacity: 1 !important; }
 
 /* Marquee */
 @keyframes marquee {
