@@ -4,48 +4,64 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 const items = [
   // — Alfresco & Pergola —
   { img: '/images/gallery-01.jpg', title: 'Alfresco Pavilion & Deck', suburb: 'Cronulla', cat: 'alfresco' },
-  { img: '/images/gallery-02.jpg', title: 'Alfresco Pavilion Side View', suburb: 'Cronulla', cat: 'alfresco' },
   { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Manly', cat: 'alfresco' },
   { img: '/images/gallery-19.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
+  { img: '/images/mc-03.jpg', title: 'Pergola & Composite Deck', suburb: 'Sydney', cat: 'alfresco' },
 
   // — Composite Decking —
   { img: '/images/gallery-05.jpg', title: 'Large Composite Terrace', suburb: 'Newport', cat: 'decking' },
   { img: '/images/gallery-06.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/gallery-07.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/gallery-08.jpg', title: 'Composite Pool Deck Aerial', suburb: 'Mosman', cat: 'decking' },
   { img: '/images/gallery-09.jpg', title: 'Composite Pool Surround', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/gallery-10.jpg', title: 'Composite Deck Detail', suburb: 'Mosman', cat: 'decking' },
-
-  // — Deck Replacement: Before & After (same job) —
-  { img: '/images/gallery-17.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-18.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-11.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-16.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-15.jpg', title: 'Deck Replacement: After', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/mc-06.jpg', title: 'Waterfront Composite Deck', suburb: 'Sydney', cat: 'decking' },
 
   // — Hardwood Decking —
-  { img: '/images/gallery-03.jpg', title: 'Hardwood Deck', suburb: 'Cremorne', cat: 'decking' },
   { img: '/images/gallery-04.jpg', title: 'Hardwood Entertainer Deck', suburb: 'Cremorne', cat: 'decking' },
+  { img: '/images/mc-07.jpg', title: 'Freshly Oiled Hardwood Deck', suburb: 'Sydney', cat: 'decking' },
+  { img: '/images/mc-09.jpg', title: 'Hardwood Deck & Bench Seating', suburb: 'Sydney', cat: 'decking' },
+  { img: '/images/mc-10.jpg', title: 'Hardwood Deck & Glass Balustrade', suburb: 'Sydney', cat: 'decking' },
+
+  // — Deck Replacement: Before & After (Pyrmont — kept together) —
+  { img: '/images/gallery-17.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-11.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-15.jpg', title: 'Deck Replacement: After', suburb: 'Pyrmont', cat: 'decking' },
+
+  // — Deck Restoration: Before & After (kept together) —
+  { img: '/images/mc-11.jpg', title: 'Deck Restoration: Before', suburb: 'Sydney', cat: 'decking' },
+  { img: '/images/mc-13.jpg', title: 'Deck Restoration: After', suburb: 'Sydney', cat: 'decking' },
 
   // — Cladding & Facade —
   { img: '/images/gallery-12.jpg', title: 'Facade Cladding & Stairs', suburb: 'Balmoral', cat: 'cladding' },
   { img: '/images/gallery-13.jpg', title: 'Black Batten Screen', suburb: 'Neutral Bay', cat: 'cladding' },
   { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
   { img: '/images/gallery-24.jpg', title: 'Timber Slat Ceiling', suburb: 'Northbridge', cat: 'cladding' },
+  { img: '/images/mc-15.jpg', title: 'Render & Batten Cladding', suburb: 'Sydney', cat: 'cladding' },
+  { img: '/images/mc-17.jpg', title: 'Timber Batten Facade', suburb: 'Sydney', cat: 'cladding' },
 
-  // — Interior —
+  // — Custom Front Doors —
+  { img: '/images/mc-23.jpg', title: 'Custom Black Batten Door', suburb: 'Sydney', cat: 'doors' },
+  { img: '/images/mc-24.jpg', title: 'Modern Black Entry', suburb: 'Sydney', cat: 'doors' },
+
+  // — Interior Fix Outs —
   { img: '/images/gallery-21.jpg', title: 'Custom Joinery & Fireplace', suburb: 'Mosman', cat: 'interior' },
   { img: '/images/gallery-22.jpg', title: 'Shiplap Fireplace Feature Wall', suburb: 'Lane Cove', cat: 'interior' },
   { img: '/images/gallery-23.jpg', title: 'Fireplace & Media Wall', suburb: 'Willoughby', cat: 'interior' },
+  { img: '/images/mc-18.jpg', title: 'Luxury Custom Joinery', suburb: 'Sydney', cat: 'interior' },
+  { img: '/images/mc-19.jpg', title: 'Walk-in Wardrobe', suburb: 'Sydney', cat: 'interior' },
+  { img: '/images/mc-21.jpg', title: 'Fireplace Feature Wall', suburb: 'Sydney', cat: 'interior' },
+  { img: '/images/mc-22.jpg', title: 'Timber Slat Ceiling & Marble Island', suburb: 'Sydney', cat: 'interior' },
 ]
 
-const filters = ['All', 'Decking', 'Cladding', 'Interior', 'Alfresco']
+const filters = ['All', 'Decking', 'Cladding', 'Fix Outs', 'Alfresco', 'Doors']
 
 export default function Gallery() {
   const [active, setActive] = useState('All')
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  const filtered = active === 'All' ? items : items.filter(i => i.cat === active.toLowerCase())
+  const filtered = active === 'All' ? items : items.filter(i => {
+    if (active === 'Fix Outs') return i.cat === 'interior'
+    if (active === 'Doors') return i.cat === 'doors'
+    return i.cat === active.toLowerCase()
+  })
 
   return (
     <section id="projects" className="rsp-section" style={{ padding: '140px 80px', background: '#0A0805', borderTop: '1px solid rgba(194,168,122,0.06)' }}>
@@ -61,7 +77,7 @@ export default function Gallery() {
             </motion.h2>
           </div>
         </div>
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.3 }} style={{ display: 'flex', gap: 4 }}>
+        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.3 }} style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           {filters.map(f => (
             <button key={f} onClick={() => setActive(f)} style={{
               padding: '10px 20px',

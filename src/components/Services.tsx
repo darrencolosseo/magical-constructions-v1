@@ -5,9 +5,9 @@ const services = [
   { title: 'Composite Decking', category: 'Outdoor Living', img: '/images/gallery-06.jpg', desc: 'Large-format boards, pool surrounds and precision framing built to last decades.' },
   { title: 'Hardwood Decking', category: 'Outdoor Living', img: '/images/gallery-04.jpg', desc: 'Spotted gum, blackbutt and ironbark. Sourced, cut and finished on-site.' },
   { title: 'Cladding & Facades', category: 'Exteriors', img: '/images/gallery-20.jpg', desc: 'Aluminium batten, fibre cement and timber cladding that transforms your home from the street.' },
-  { title: 'Interior Renovations', category: 'Interiors', img: '/images/gallery-22.jpg', desc: 'Full-scope internal remodels with architectural joinery and premium finishes.' },
+  { title: 'Interior Fix Outs', category: 'Interiors', img: '/images/mc-18.jpg', desc: 'Custom joinery, feature walls, fireplaces and premium finishes throughout your home.' },
   { title: 'Alfresco Kitchens', category: 'Outdoor Living', img: '/images/gallery-14.jpg', desc: 'Custom outdoor kitchens and entertaining spaces built for the Sydney lifestyle.' },
-  { title: 'Full Builds', category: 'Construction', img: '/images/gallery-20.jpg', desc: 'End-to-end project management for extensions, granny flats and new builds.' },
+  { title: 'Custom Front Doors', category: 'Exteriors', img: '/images/mc-23.jpg', desc: 'Bespoke entry doors crafted in timber, aluminium batten and steel that make a statement from the street.' },
 ]
 
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
