@@ -47,7 +47,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // Notify business owner
     const bizResult = await resend.emails.send({
-      from: 'Magical Constructions <onboarding@resend.dev>',
+      from: 'Magical Constructions <quotes@magicalconstruction.com.au>',
       to: ['magicalconstructions@gmail.com'],
       reply_to: email,
       subject: `New Quote: ${service || 'General'} — ${name} (${suburb || 'NSW'})`,
@@ -61,7 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Customer confirmation
     const custResult = await resend.emails.send({
-      from: 'Magical Constructions <onboarding@resend.dev>',
+      from: 'Magical Constructions <quotes@magicalconstruction.com.au>',
       to: [email],
       subject: 'Your quote request has been received — Magical Constructions',
       html: customerHtml,
