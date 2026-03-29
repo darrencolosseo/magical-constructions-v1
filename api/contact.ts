@@ -1,12 +1,19 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import nodemailer from 'nodemailer'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const { name, email, phone, suburb, service, message } = req.body
+
+  // Gmail SMTP transporter — uses GMAIL_USER + GMAIL_APP_PASSWORD env vars
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER,       // magicalconstructions@gmail.com
+      pass: process.env.GMAIL_APP_PASSWORD, // 16-char App Password from Google Account
+    },
+  })
 
   const businessHtml = `
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background: #0A0805; color: #EDE8DF; padding: 40px; border: 1px solid #C2A87A;">
@@ -41,26 +48,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   `
 
   try {
-    // Notify business
-    await resend.emails.send({
-      from: 'Magical Constructions <onboarding@resend.dev>',
-      to: ['magicalconstructions@gmail.com'],
-      reply_to: email,
+    // Notify Darren — new lead
+    await transporter.sendMail({
+      from: `"Magical Constructions" <${process.env.GMAIL_USER}>`,
+      to: 'magicalconstructions@gmail.com',
+      replyTo: email,
       subject: `New Quote: ${service || 'General'} — ${name} (${suburb || 'NSW'})`,
       html: businessHtml,
     })
 
-    // Customer confirmation
-    await resend.emails.send({
-      from: 'Magical Constructions <onboarding@resend.dev>',
-      to: [email],
-      subject: 'Your quote request has been received',
-      html: customerHtml,
-    })
+    // Customer confirmation (only if they provided a valid email)
+    if (email) {
+      await transporter.sendMail({
+        from: `"Magical Constructions" <${process.env.GMAIL_USER}>`,
+        to: email,
+        subject: 'Your quote request has been received — Magical Constructions',
+        html: customerHtml,
+      })
+    }
 
     res.status(200).json({ success: true })
   } catch (err) {
-    console.error('Resend error:', err)
+    console.error('Email error:', err)
     res.status(500).json({ error: 'Failed to send email' })
   }
 }
