@@ -12,6 +12,7 @@ const items = [
   { img: '/images/gallery-05.jpg', title: 'Large Composite Terrace', suburb: 'Newport', cat: 'decking' },
   { img: '/images/gallery-06.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
   { img: '/images/gallery-09.jpg', title: 'Composite Pool Surround', suburb: 'Mosman', cat: 'decking' },
+  { img: '/images/mc-04.jpg', title: 'Composite Deck & Spa', suburb: 'Sydney', cat: 'decking' },
   { img: '/images/mc-06.jpg', title: 'Waterfront Composite Deck', suburb: 'Sydney', cat: 'decking' },
 
   // — Hardwood Decking —
