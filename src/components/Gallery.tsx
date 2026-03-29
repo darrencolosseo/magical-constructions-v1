@@ -2,42 +2,41 @@ import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const items = [
-  { img: '/images/extra-facade-01.jpg', title: 'Modern Facade & Louvre Build', suburb: 'Ryde', cat: 'cladding' },
-  { img: '/images/extra-alfresco-01.jpg', title: 'Curved Alfresco Pavilion', suburb: 'Manly', cat: 'alfresco' },
-  { img: '/images/extra-deck-hardwood-01.jpg', title: 'Hardwood Deck & Landscaping', suburb: 'Neutral Bay', cat: 'decking' },
-  { img: '/images/extra-fireplace-01.jpg', title: 'Fireplace Feature Build', suburb: 'Lane Cove', cat: 'interior' },
-  { img: '/images/extra-deck-composite-01.jpg', title: 'Dark Composite Deck', suburb: 'Northbridge', cat: 'decking' },
-  { img: '/images/extra-joinery-01.jpg', title: 'Custom LED Joinery Wall', suburb: 'Mosman', cat: 'interior' },
-  { img: '/images/extra-pergola-01.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
-  { img: '/images/extra-deck-hardwood-02.jpg', title: 'Hardwood Courtyard Deck', suburb: 'Crows Nest', cat: 'decking' },
-  { img: '/images/extra-fireplace-02.jpg', title: 'Shiplap Fireplace Feature Wall', suburb: 'Willoughby', cat: 'interior' },
-  { img: '/images/extra-deck-hardwood-03.jpg', title: 'Hardwood Entry Deck', suburb: 'Crows Nest', cat: 'decking' },
-  { img: '/images/extra-deck-composite-02.jpg', title: 'Composite Deck Courtyard', suburb: 'Northbridge', cat: 'decking' },
-  { img: '/images/extra-ceiling-01.jpg', title: 'Timber Slat Ceiling Cladding', suburb: 'Northbridge', cat: 'cladding' },
-  { img: '/images/gallery-01.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/gallery-02.jpg', title: 'Hardwood Entertainer', suburb: 'Balmoral', cat: 'decking' },
-  { img: '/images/gallery-03.jpg', title: 'Aluminium Facade', suburb: 'Northwood', cat: 'cladding' },
-  { img: '/images/gallery-04.jpg', title: 'Pool Surround Deck', suburb: 'Cremorne', cat: 'decking' },
-  { img: '/images/gallery-05.jpg', title: 'Timber Batten Screen', suburb: 'Lane Cove', cat: 'cladding' },
-  { img: '/images/gallery-06.jpg', title: 'Alfresco Kitchen', suburb: 'Willoughby', cat: 'alfresco' },
-  { img: '/images/gallery-07.jpg', title: 'Interior Renovation', suburb: 'Neutral Bay', cat: 'interior' },
-  { img: '/images/gallery-08.jpg', title: 'Cladding & Deck', suburb: 'Chatswood', cat: 'cladding' },
-  { img: '/images/gallery-09.jpg', title: 'Full Build', suburb: 'Longueville', cat: 'decking' },
-  { img: '/images/gallery-10.jpg', title: 'Composite Decking', suburb: 'Artarmon', cat: 'decking' },
-  { img: '/images/gallery-11.jpg', title: 'Facade Cladding', suburb: 'St Leonards', cat: 'cladding' },
-  { img: '/images/gallery-12.jpg', title: 'Alfresco Build', suburb: 'Pymble', cat: 'alfresco' },
-  { img: '/images/gallery-13.jpg', title: 'Batten Wall Screen', suburb: 'Neutral Bay', cat: 'cladding' },
-  { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Northbridge', cat: 'alfresco' },
-  { img: '/images/gallery-15.jpg', title: 'Hardwood Courtyard Deck', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-16.jpg', title: 'Hardwood Entry Deck', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-17.jpg', title: 'Composite Courtyard Deck', suburb: 'Rushcutters Bay', cat: 'decking' },
-  { img: '/images/gallery-18.jpg', title: 'Composite Deck & Gardens', suburb: 'Rushcutters Bay', cat: 'decking' },
-  { img: '/images/gallery-19.jpg', title: 'Alfresco Pergola & Deck', suburb: 'Penrith', cat: 'alfresco' },
+  // — Alfresco & Pergola —
+  { img: '/images/gallery-01.jpg', title: 'Alfresco Pavilion & Deck', suburb: 'Cronulla', cat: 'alfresco' },
+  { img: '/images/gallery-02.jpg', title: 'Alfresco Pavilion Side View', suburb: 'Cronulla', cat: 'alfresco' },
+  { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Manly', cat: 'alfresco' },
+  { img: '/images/gallery-19.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
+
+  // — Composite Decking —
+  { img: '/images/gallery-05.jpg', title: 'Large Composite Terrace', suburb: 'Newport', cat: 'decking' },
+  { img: '/images/gallery-06.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
+  { img: '/images/gallery-07.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
+  { img: '/images/gallery-08.jpg', title: 'Composite Pool Deck Aerial', suburb: 'Mosman', cat: 'decking' },
+  { img: '/images/gallery-09.jpg', title: 'Composite Pool Surround', suburb: 'Mosman', cat: 'decking' },
+  { img: '/images/gallery-10.jpg', title: 'Composite Deck Detail', suburb: 'Mosman', cat: 'decking' },
+
+  // — Deck Replacement: Before & After (same job) —
+  { img: '/images/gallery-17.jpg', title: 'Deck Replacement — Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-18.jpg', title: 'Deck Replacement — Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-11.jpg', title: 'Deck Replacement — Progress', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-16.jpg', title: 'Deck Replacement — Progress', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-15.jpg', title: 'Deck Replacement — After', suburb: 'Pyrmont', cat: 'decking' },
+
+  // — Hardwood Decking —
+  { img: '/images/gallery-03.jpg', title: 'Hardwood Deck', suburb: 'Cremorne', cat: 'decking' },
+  { img: '/images/gallery-04.jpg', title: 'Hardwood Entertainer Deck', suburb: 'Cremorne', cat: 'decking' },
+
+  // — Cladding & Facade —
+  { img: '/images/gallery-12.jpg', title: 'Facade Cladding & Stairs', suburb: 'Balmoral', cat: 'cladding' },
+  { img: '/images/gallery-13.jpg', title: 'Black Batten Screen', suburb: 'Neutral Bay', cat: 'cladding' },
   { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
-  { img: '/images/gallery-21.jpg', title: 'Custom Built-In Shelving', suburb: 'Mosman', cat: 'interior' },
-  { img: '/images/gallery-22.jpg', title: 'Feature Wall & Fireplace', suburb: 'Lane Cove', cat: 'interior' },
-  { img: '/images/gallery-23.jpg', title: 'Fireplace Feature Panel', suburb: 'Willoughby', cat: 'interior' },
-  { img: '/images/gallery-24.jpg', title: 'Composite Ceiling Cladding', suburb: 'Northbridge', cat: 'cladding' },
+  { img: '/images/gallery-24.jpg', title: 'Timber Slat Ceiling', suburb: 'Northbridge', cat: 'cladding' },
+
+  // — Interior —
+  { img: '/images/gallery-21.jpg', title: 'Custom Joinery & Fireplace', suburb: 'Mosman', cat: 'interior' },
+  { img: '/images/gallery-22.jpg', title: 'Shiplap Fireplace Feature Wall', suburb: 'Lane Cove', cat: 'interior' },
+  { img: '/images/gallery-23.jpg', title: 'Fireplace & Media Wall', suburb: 'Willoughby', cat: 'interior' },
 ]
 
 const filters = ['All', 'Decking', 'Cladding', 'Interior', 'Alfresco']
