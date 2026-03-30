@@ -31,6 +31,7 @@ const items = [
   { img: '/images/mc-13.jpg', title: 'Deck Restoration: After', suburb: 'Sydney', cat: 'decking' },
 
   // — Cladding & Facade —
+  { img: '/images/mc-25.jpg', title: 'Batten Cladding, Garage & Entry', suburb: 'Sydney', cat: 'cladding' },
   { img: '/images/gallery-12.jpg', title: 'Facade Cladding & Stairs', suburb: 'Balmoral', cat: 'cladding' },
   { img: '/images/gallery-13.jpg', title: 'Black Batten Screen', suburb: 'Neutral Bay', cat: 'cladding' },
   { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
@@ -39,6 +40,7 @@ const items = [
   { img: '/images/mc-17.jpg', title: 'Timber Batten Facade', suburb: 'Sydney', cat: 'cladding' },
 
   // — Custom Front Doors —
+  { img: '/images/mc-25.jpg', title: 'Batten Cladding, Garage & Entry', suburb: 'Sydney', cat: 'doors' },
   { img: '/images/mc-23.jpg', title: 'Custom Black Batten Door', suburb: 'Sydney', cat: 'doors' },
   { img: '/images/mc-24.jpg', title: 'Modern Black Entry', suburb: 'Sydney', cat: 'doors' },
 
