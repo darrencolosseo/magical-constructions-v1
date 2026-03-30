@@ -6,7 +6,6 @@ const items = [
   { img: '/images/gallery-01.jpg', title: 'Alfresco Pavilion & Deck', suburb: 'Cronulla', cat: 'alfresco' },
   { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Manly', cat: 'alfresco' },
   { img: '/images/gallery-19.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
-  { img: '/images/mc-03.jpg', title: 'Pergola & Composite Deck', suburb: 'Sydney', cat: 'alfresco' },
 
   // — Composite Decking —
   { img: '/images/gallery-05.jpg', title: 'Large Composite Terrace', suburb: 'Newport', cat: 'decking' },
@@ -29,13 +28,13 @@ const items = [
   // — Deck Restoration: Before & After (kept together) —
   { img: '/images/mc-11.jpg', title: 'Deck Restoration: Before', suburb: 'Sydney', cat: 'decking' },
   { img: '/images/mc-13.jpg', title: 'Deck Restoration: After', suburb: 'Sydney', cat: 'decking' },
+  { img: '/images/mc-05.jpg', title: 'Composite Deck & Spa', suburb: 'Sydney', cat: 'decking' },
 
   // — Cladding & Facade —
   { img: '/images/mc-25.jpg', title: 'Batten Cladding, Garage & Entry', suburb: 'Sydney', cat: 'cladding' },
   { img: '/images/gallery-12.jpg', title: 'Facade Cladding & Stairs', suburb: 'Balmoral', cat: 'cladding' },
   { img: '/images/gallery-13.jpg', title: 'Black Batten Screen', suburb: 'Neutral Bay', cat: 'cladding' },
   { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
-  { img: '/images/gallery-24.jpg', title: 'Timber Slat Ceiling', suburb: 'Northbridge', cat: 'cladding' },
   { img: '/images/mc-15.jpg', title: 'Render & Batten Cladding', suburb: 'Sydney', cat: 'cladding' },
   { img: '/images/mc-17.jpg', title: 'Timber Batten Facade', suburb: 'Sydney', cat: 'cladding' },
 
@@ -51,7 +50,6 @@ const items = [
   { img: '/images/mc-18.jpg', title: 'Luxury Custom Joinery', suburb: 'Sydney', cat: 'interior' },
   { img: '/images/mc-19.jpg', title: 'Walk-in Wardrobe', suburb: 'Sydney', cat: 'interior' },
   { img: '/images/mc-21.jpg', title: 'Fireplace Feature Wall', suburb: 'Sydney', cat: 'interior' },
-  { img: '/images/mc-22.jpg', title: 'Timber Slat Ceiling & Marble Island', suburb: 'Sydney', cat: 'interior' },
 ]
 
 const filters = ['All', 'Decking', 'Cladding', 'Fix Outs', 'Alfresco', 'Doors']
