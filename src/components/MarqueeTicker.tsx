@@ -1,5 +1,5 @@
 export default function MarqueeTicker() {
-  const items = ['Composite Decking', 'Hardwood Decking', 'Cladding & Facades', 'Alfresco Kitchens', 'Interior Renovations', 'Full Builds', 'Pool Surrounds', 'Batten Screens']
+  const items = ['Composite Decking', 'Hardwood Decking', 'Cladding & Facades', 'Alfresco Kitchens', 'Interior Fix Outs', 'Custom Front Doors', 'Pool Surrounds', 'Batten Screens']
   const repeated = [...items, ...items]
 
   return (

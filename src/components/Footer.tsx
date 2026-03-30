@@ -10,9 +10,9 @@ export default function Footer() {
             <span style={{ width: 1, height: 20, background: 'rgba(194,168,122,0.2)' }} />
             <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 300, color: '#EDE8DF', letterSpacing: '0.02em' }}>Magical Constructions</span>
           </div>
-          <div style={{ fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(194,168,122,0.5)', marginBottom: 32 }}>Premium Builds · Sydney</div>
+          <div style={{ fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(194,168,122,0.5)', marginBottom: 32 }}>Premium Carpentry · Sydney</div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.3)', fontWeight: 300, lineHeight: 1.85, maxWidth: 360 }}>
-            Sydney-based builders specialising in composite decking, cladding, facades and architectural residential builds. Every project treated as our own.
+            Sydney-based specialists in composite decking, hardwood decking, cladding, alfresco kitchens, custom front doors and interior fix outs. Every project treated as our own.
           </p>
         </div>
 
