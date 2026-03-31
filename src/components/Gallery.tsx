@@ -2,57 +2,40 @@ import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const items = [
+  // — Deck Replacement: Before → After —
+  { img: '/images/mc-24.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
+  { img: '/images/gallery-15.jpg', title: 'Deck Replacement: After', suburb: 'Pyrmont', cat: 'decking' },
+
+  // — Composite Decking —
+  { img: '/images/gallery-09.jpg', title: 'Composite Deck & Fire Pit', suburb: 'Mosman', cat: 'decking' },
+
+  // — Hardwood Decking —
+  { img: '/images/gallery-04.jpg', title: 'Hardwood Entertainer Deck', suburb: 'Cremorne', cat: 'decking' },
+  { img: '/images/mc-09.jpg', title: 'Hardwood Deck & Bench Seating', suburb: 'Sydney', cat: 'decking' },
+  { img: '/images/mc-10.jpg', title: 'Hardwood Deck & Glass Balustrade', suburb: 'Sydney', cat: 'decking' },
+
   // — Alfresco & Pergola —
   { img: '/images/gallery-01.jpg', title: 'Alfresco Pavilion & Deck', suburb: 'Cronulla', cat: 'alfresco' },
   { img: '/images/gallery-14.jpg', title: 'Curved Alfresco Kitchen', suburb: 'Manly', cat: 'alfresco' },
   { img: '/images/gallery-19.jpg', title: 'Pergola & Composite Deck', suburb: 'Penrith', cat: 'alfresco' },
 
-  // — Composite Decking —
-  { img: '/images/gallery-05.jpg', title: 'Large Composite Terrace', suburb: 'Newport', cat: 'decking' },
-  { img: '/images/gallery-06.jpg', title: 'Composite Pool Deck', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/gallery-09.jpg', title: 'Composite Pool Surround', suburb: 'Mosman', cat: 'decking' },
-  { img: '/images/mc-04.jpg', title: 'Composite Deck & Spa', suburb: 'Sydney', cat: 'decking' },
-  { img: '/images/mc-06.jpg', title: 'Waterfront Composite Deck', suburb: 'Sydney', cat: 'decking' },
-
-  // — Hardwood Decking —
-  { img: '/images/gallery-04.jpg', title: 'Hardwood Entertainer Deck', suburb: 'Cremorne', cat: 'decking' },
-  { img: '/images/mc-07.jpg', title: 'Freshly Oiled Hardwood Deck', suburb: 'Sydney', cat: 'decking' },
-  { img: '/images/mc-09.jpg', title: 'Hardwood Deck & Bench Seating', suburb: 'Sydney', cat: 'decking' },
-  { img: '/images/mc-10.jpg', title: 'Hardwood Deck & Glass Balustrade', suburb: 'Sydney', cat: 'decking' },
-
-  // — Deck Replacement: Before & After (Pyrmont — kept together) —
-  { img: '/images/gallery-17.jpg', title: 'Deck Replacement: Before', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-11.jpg', title: 'Deck Replacement: Progress', suburb: 'Pyrmont', cat: 'decking' },
-  { img: '/images/gallery-15.jpg', title: 'Deck Replacement: After', suburb: 'Pyrmont', cat: 'decking' },
-
-  // — Deck Restoration: Before & After (kept together) —
-  { img: '/images/mc-11.jpg', title: 'Deck Restoration: Before', suburb: 'Sydney', cat: 'decking' },
-  { img: '/images/mc-13.jpg', title: 'Deck Restoration: After', suburb: 'Sydney', cat: 'decking' },
-  { img: '/images/mc-05.jpg', title: 'Composite Deck & Spa', suburb: 'Sydney', cat: 'decking' },
-
   // — Cladding & Facade —
-  { img: '/images/mc-25.jpg', title: 'Batten Cladding, Garage & Entry', suburb: 'Sydney', cat: 'cladding' },
   { img: '/images/gallery-12.jpg', title: 'Facade Cladding & Stairs', suburb: 'Balmoral', cat: 'cladding' },
-  { img: '/images/gallery-13.jpg', title: 'Black Batten Screen', suburb: 'Neutral Bay', cat: 'cladding' },
-  { img: '/images/gallery-20.jpg', title: 'Modern Facade Build', suburb: 'Ryde', cat: 'cladding' },
-  { img: '/images/mc-15.jpg', title: 'Render & Batten Cladding', suburb: 'Sydney', cat: 'cladding' },
+  { img: '/images/extra-pergola-01.jpg', title: 'Alfresco Pergola & Deck', suburb: 'Sydney', cat: 'alfresco' },
   { img: '/images/mc-17.jpg', title: 'Timber Batten Facade', suburb: 'Sydney', cat: 'cladding' },
 
   // — Custom Front Doors —
   { img: '/images/mc-25.jpg', title: 'Batten Cladding, Garage & Entry', suburb: 'Sydney', cat: 'doors' },
+  { img: '/images/mc-21.jpg', title: 'Castellated Garage Doors & Custom Entry', suburb: 'Sydney', cat: 'doors' },
   { img: '/images/mc-23.jpg', title: 'Custom Black Batten Door', suburb: 'Sydney', cat: 'doors' },
-  { img: '/images/mc-24.jpg', title: 'Modern Black Entry', suburb: 'Sydney', cat: 'doors' },
 
-  // — Interior Fix Outs —
-  { img: '/images/gallery-21.jpg', title: 'Custom Joinery & Fireplace', suburb: 'Mosman', cat: 'interior' },
-  { img: '/images/gallery-22.jpg', title: 'Shiplap Fireplace Feature Wall', suburb: 'Lane Cove', cat: 'interior' },
+  // — Custom Joinery —
   { img: '/images/gallery-23.jpg', title: 'Fireplace & Media Wall', suburb: 'Willoughby', cat: 'interior' },
   { img: '/images/mc-18.jpg', title: 'Luxury Custom Joinery', suburb: 'Sydney', cat: 'interior' },
   { img: '/images/mc-19.jpg', title: 'Walk-in Wardrobe', suburb: 'Sydney', cat: 'interior' },
-  { img: '/images/mc-21.jpg', title: 'Fireplace Feature Wall', suburb: 'Sydney', cat: 'interior' },
 ]
 
-const filters = ['All', 'Decking', 'Cladding', 'Fix Outs', 'Alfresco', 'Doors']
+const filters = ['All', 'Decking', 'Cladding', 'Joinery', 'Alfresco', 'Doors']
 
 export default function Gallery() {
   const [active, setActive] = useState('All')

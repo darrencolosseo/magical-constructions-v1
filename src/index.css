@@ -137,12 +137,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .service-card   { height: 320px !important; }
 }
 
+/* Nav padding on tablet/mobile */
+@media (max-width: 900px) {
+  nav { padding-left: 32px !important; padding-right: 32px !important; }
+}
+@media (max-width: 768px) {
+  nav { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
 @media (max-width: 600px) {
   .rsp-section    { padding: 64px 20px !important; }
   .rsp-hero       { padding: 0 20px !important; }
-  .rsp-grid-3     { grid-template-columns: 1fr !important; }
+  .rsp-grid-3     { grid-template-columns: 1fr !important; grid-auto-rows: 260px !important; }
   .rsp-grid-4     { grid-template-columns: repeat(2, 1fr) !important; }
   .rsp-footer     { grid-template-columns: 1fr !important; }
   .rsp-process    { grid-template-columns: 1fr !important; }
   .rsp-footer-bar { flex-direction: column !important; gap: 6px !important; align-items: flex-start !important; }
+  .service-card   { height: 260px !important; }
 }

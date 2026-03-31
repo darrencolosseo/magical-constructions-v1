@@ -12,8 +12,28 @@ export default function Footer() {
           </div>
           <div style={{ fontFamily: "'Inter'", fontSize: 9, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(194,168,122,0.5)', marginBottom: 32 }}>Premium Carpentry · Sydney</div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(237,232,223,0.3)', fontWeight: 300, lineHeight: 1.85, maxWidth: 360 }}>
-            Sydney-based specialists in composite decking, hardwood decking, cladding, alfresco kitchens, custom front doors and interior fix outs. Every project treated as our own.
+            Sydney-based specialists in composite & hardwood decking, cladding & facades, alfresco pavilions, custom joinery and custom front doors. Every project treated as our own.
           </p>
+          <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
+            <a href="https://www.instagram.com/magicalconstructions/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              style={{ width: 36, height: 36, border: '1px solid rgba(194,168,122,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(237,232,223,0.4)', transition: 'all 0.3s ease', flexShrink: 0 }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#C2A87A'; e.currentTarget.style.color = '#C2A87A' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(194,168,122,0.2)'; e.currentTarget.style.color = 'rgba(237,232,223,0.4)' }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/p/Magical-Constructions-61552643429736/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+              style={{ width: 36, height: 36, border: '1px solid rgba(194,168,122,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(237,232,223,0.4)', transition: 'all 0.3s ease', flexShrink: 0 }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#C2A87A'; e.currentTarget.style.color = '#C2A87A' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(194,168,122,0.2)'; e.currentTarget.style.color = 'rgba(237,232,223,0.4)' }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div>
