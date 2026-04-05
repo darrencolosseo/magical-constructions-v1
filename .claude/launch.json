@@ -9,8 +9,8 @@
     },
     {
       "name": "magical-constructions",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5178", "--strictPort"],
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["node_modules/.bin/vite", "--port", "5178", "--strictPort"],
       "port": 5178
     }
   ]

@@ -36,8 +36,7 @@ export default function Nav() {
       >
         {/* Logo */}
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 400, color: '#C2A87A', letterSpacing: '0.04em' }}>MC</span>
-          <span style={{ width: 1, height: 18, background: 'rgba(194,168,122,0.25)' }} />
+          <img src="/images/logo.jpg" alt="Magical Constructions" style={{ height: 40, width: 40, objectFit: 'contain', borderRadius: 4 }} />
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, fontWeight: 300, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(237,232,223,0.5)' }}>Magical Constructions</span>
         </a>
 

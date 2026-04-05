@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="rsp-footer" style={{ padding: '100px 80px 64px', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 80, borderBottom: '1px solid rgba(194,168,122,0.06)' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 400, color: '#C2A87A' }}>MC</span>
+            <img src="/images/logo.jpg" alt="Magical Constructions" style={{ height: 52, width: 52, objectFit: 'contain', borderRadius: 4 }} />
             <span style={{ width: 1, height: 20, background: 'rgba(194,168,122,0.2)' }} />
             <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 300, color: '#EDE8DF', letterSpacing: '0.02em' }}>Magical Constructions</span>
           </div>
